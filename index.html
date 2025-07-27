@@ -2565,16 +2565,6 @@
     }
 }
 
-// 기존 setTestLevel 함수를 지우고 아래 코드로 교체하세요.
-function setTestLevel(event, level) {
-    testLevel = level;
-    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-
-    updateTestInfo();
-    resetTest();
-}
-
         // 테스트 관련 변수
         let testLevel = 0;
         let currentQuestionIndex = 0;
