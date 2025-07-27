@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제제편입 7월 먼슬리 어휘 정리</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #6c757d 0%, #ff6b6b 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+        }
+
+        .search-box {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .word-card {
+            background: #fff3e0;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .word-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #6c757d);
+        }
+
+        .word-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .word-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .word-example {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-style: normal;
+            color: #555;
+            border-left: 4px solid #ff6b6b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .word-relations {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .relation-box {
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .synonyms {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .antonyms {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .relation-label {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .word-meaning {
+            background: #f0f4ff;
+            padding: 12px;
+            border-radius: 8px;
+            color: #333;
+            font-weight: 500;
+            border: 2px solid #e0e9ff;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* 테이블 뷰 스타일 */
+        .table-view {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 107, 107, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-family: 'Pretendard', -apple-system, sans-serif;
+        }
+
+        th {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+            color: white;
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th:first-child {
+            border-top-left-radius: 20px;
+            width: 15%;
+        }
+
+        th:last-child {
+            border-top-right-radius: 20px;
+            width: 20%;
+        }
+
+        th:nth-child(2) {
+            width: 35%;
+        }
+
+        th:nth-child(3), th:nth-child(4) {
+            width: 15%;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f8f9fa;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #495057;
+            vertical-align: top;
+        }
+
+        tr {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        tr:hover {
+            background: linear-gradient(90deg, #fff5f5 0%, #fff9f9 100%);
+            transform: scale(1.01);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.08);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 단어 스타일링 */
+        td:first-child {
+            font-weight: 700;
+            color: #ff6b6b;
+            font-size: 15px;
+            letter-spacing: -0.3px;
+        }
+
+        /* 예문 스타일링 */
+        td:nth-child(2) {
+            color: #6c757d;
+            font-style: normal;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        td:nth-child(2)::before {
+            content: '"';
+            position: absolute;
+            left: 20px;
+            top: 16px;
+            font-size: 20px;
+            color: #ff6b6b;
+            opacity: 0.3;
+        }
+
+        /* 동의어 스타일링 */
+        td:nth-child(3) {
+            color: #28a745;
+            font-weight: 500;
+            background: rgba(40, 167, 69, 0.05);
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        /* 반의어 스타일링 */
+        td:nth-child(4) {
+            color: #dc3545;
+            font-weight: 500;
+            background: rgba(220, 53, 69, 0.05);
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        /* 뜻 스타일링 */
+        td:last-child {
+            font-weight: 500;
+            color: #212529;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        /* 테이블 내 강조 텍스트 */
+        .table-view strong {
+            color: inherit;
+            font-weight: 700;
+        }
+
+        /* 홀수 행 배경색 */
+        tr:nth-child(odd) {
+            background-color: #fafbfc;
+        }
+
+        /* 테이블 스크롤바 스타일링 */
+        .table-view::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-view::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .table-view::-webkit-scrollbar-thumb {
+            background: #ff6b6b;
+            border-radius: 4px;
+        }
+
+        .table-view::-webkit-scrollbar-thumb:hover {
+            background: #ff5252;
+        }
+
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            padding: 10px 24px;
+            border: 2px solid transparent;
+            background: white;
+            color: #6c757d;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            font-size: 14px;
+            letter-spacing: -0.2px;
+        }
+
+        .toggle-btn.active {
+            background: #ff6b6b;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 7px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.12);
+            border-color: #ff6b6b;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .word-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-view {
+                overflow-x: auto;
+            }
+            
+            table {
+                min-width: 600px;
+            }
+        }
+
+        /* 테스트 뷰 스타일 */
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .test-header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .test-header h2 {
+            margin: 0;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .test-score {
+            font-size: 20px;
+            color: #ff6b6b;
+            font-weight: 700;
+        }
+
+        .test-mode-selector {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .mode-btn {
+            padding: 12px 24px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            color: #6c757d;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .mode-btn.active {
+            background: #ff6b6b;
+            color: white;
+            border-color: #ff6b6b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .mode-btn:hover {
+            border-color: #ff6b6b;
+            transform: translateY(-1px);
+        }
+
+        .test-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            min-height: 300px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .question {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .question-text {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .question-hint {
+            font-size: 16px;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .answer-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .answer-btn {
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+        }
+
+        .answer-btn:hover {
+            border-color: #ff6b6b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .answer-btn.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+            animation: correctPulse 0.5s;
+        }
+
+        .answer-btn.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+            animation: shake 0.5s;
+        }
+
+        .answer-btn.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .test-controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .control-btn {
+            padding: 15px 40px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .test-results {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .result-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .result-score {
+            font-size: 48px;
+            color: #ff6b6b;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .result-message {
+            font-size: 18px;
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+
+        .wrong-answers {
+            text-align: left;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .wrong-answer-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .wrong-answer-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .wrong-word {
+            font-weight: 700;
+            color: #dc3545;
+            font-size: 16px;
+        }
+
+        .correct-answer {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        /* 빈칸 채우기 스타일 */
+        .fill-blank-question {
+            font-size: 18px;
+            line-height: 2;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .blank-input {
+            display: inline-block;
+            width: 200px;
+            padding: 8px 15px;
+            border: 2px solid #ff6b6b;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            margin: 0 5px;
+        }
+
+        .blank-input:focus {
+            outline: none;
+            border-color: #ff5252;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .check-answer-btn {
+            padding: 12px 30px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .check-answer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 제제편입 7월 먼슬리 어휘 정리</h1>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="단어를 검색하세요...">
+        </div>
+        
+        <div class="view-toggle">
+            <button class="toggle-btn active" onclick="showView('card')">카드 뷰</button>
+            <button class="toggle-btn" onclick="showView('table')">테이블 뷰</button>
+            <button class="toggle-btn" onclick="showView('test')">테스트 📝</button>
+        </div>
+        
+        <!-- 카드 뷰 -->
+        <div id="cardView" class="word-grid">
+            <!-- 카드들이 여기에 동적으로 추가됩니다 -->
+        </div>
+        
+        <!-- 테이블 뷰 -->
+        <div id="tableView" class="table-view" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>단어</th>
+                        <th>예문</th>
+                        <th>동의어</th>
+                        <th>반의어</th>
+                        <th>뜻</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- 테이블 행들이 여기에 동적으로 추가됩니다 -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 테스트 뷰 -->
+        <div id="testView" style="display: none;">
+            <div class="test-container">
+                <div class="test-header">
+                    <h2>📝 단어 테스트</h2>
+                    <div class="test-score">
+                        <span id="currentScore">0</span> / <span id="totalQuestions">10</span>
+                    </div>
+                </div>
+                
+                <div class="test-mode-selector">
+                    <button class="mode-btn active" onclick="setTestMode('meaning')">뜻 맞추기</button>
+                    <button class="mode-btn" onclick="setTestMode('word')">단어 맞추기</button>
+                    <button class="mode-btn" onclick="setTestMode('blank')">빈칸 채우기</button>
+                </div>
+                
+                <div id="testContent" class="test-content">
+                    <!-- 테스트 문제가 여기에 표시됩니다 -->
+                </div>
+                
+                <div class="test-controls">
+                    <button class="control-btn" onclick="startTest()">테스트 시작</button>
+                    <button class="control-btn" onclick="showResults()" style="display: none;" id="showResultsBtn">결과 보기</button>
+                </div>
+                
+                <div id="testResults" class="test-results" style="display: none;">
+                    <!-- 테스트 결과가 여기에 표시됩니다 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 단어 데이터
+        const words = [
+            {
+                word: "heretical",
+                example: "편붕이는 영어 문법은 절대적 진리가 아니라는 heretical 생각을 품고 자신만의 학습법을 개발했다.",
+                synonyms: "unorthodox, dissenting, iconoclastic",
+                antonyms: "orthodox, conventional",
+                meaning: "이단적인, 이설의"
+            },
+            {
+                word: "derivative",
+                example: "편붕이는 derivative인 어휘들을 외우기 위해 어원 분석 노트를 만들었다.",
+                synonyms: "derived, secondary, unoriginal",
+                antonyms: "original, primary",
+                meaning: "파생적인, 유도된; 파생어, 유도어"
+            },
+            {
+                word: "incite",
+                example: "스터디 그룹에서 나태해진 분위기를 바꿔보고자 편붕이는 친구들을 incite해서 다 같이 열심히 공부하기로 결의했다.",
+                synonyms: "provoke, stimulate, agitate, encourage",
+                antonyms: "deter, discourage, pacify, calm",
+                meaning: "선동하다, 자극하다"
+            },
+            {
+                word: "authentic",
+                example: "편붕이는 시험장에서 답안지를 확인하며, 본인의 실력으로 얻은 authentic 점수에 안도했다.",
+                synonyms: "genuine, real, true, bona fide",
+                antonyms: "fake, false, counterfeit, spurious",
+                meaning: "진짜의, 진품의"
+            },
+            {
+                word: "enigmatic",
+                example: "편붕이는 해석하기 enigmatic한 독해 지문 앞에서 깊은 생각에 잠겼다.",
+                synonyms: "mysterious, puzzling, inscrutable",
+                antonyms: "clear, obvious",
+                meaning: "수수께끼 같은, 불가사의한"
+            },
+            {
+                word: "substantiated",
+                example: "스터디 그룹에서 편붕이의 영어 실력 향상은 mock test 점수로 substantiated되었다.",
+                synonyms: "verified, confirmed, proven",
+                antonyms: "unproven, disproved",
+                meaning: "입증된"
+            },
+            {
+                word: "counterfeit",
+                example: "편붕이는 시험장에서 counterfeit 신분증을 제시하다가 퇴실 조치를 당했다.",
+                synonyms: "fake, forged, phony, bogus",
+                antonyms: "genuine, authentic",
+                meaning: "위조의, 모조의; 위조품, 모조품"
+            },
+            {
+                word: "obtuse",
+                example: "편붕이는 선생님의 힌트에도 obtuse해서 문제를 이해하지 못하고 결국 질문했다.",
+                synonyms: "slow, dull, insensitive",
+                antonyms: "sharp, keen",
+                meaning: "둔감한, 이해가 느린"
+            },
+            {
+                word: "astute",
+                example: "편붕이는 astute하게 기출문제 분석을 통해 출제 경향을 파악했다.",
+                synonyms: "shrewd, sharp, clever, perceptive",
+                antonyms: "obtuse, naive",
+                meaning: "기민한, 빈틈없는"
+            },
+            {
+                word: "volatile",
+                example: "편붕이는 volatile한 영어 점수 때문에 스트레스를 받았지만, 꾸준히 공부하며 실력 향상에 집중했다.",
+                synonyms: "unstable, erratic, fickle, capricious",
+                antonyms: "stable, steady",
+                meaning: "변덕스러운, 불안정한"
+            },
+            {
+                word: "neuroplasticity",
+                example: "편붕이는 neuroplasticity 덕분에 꾸준한 어휘 학습을 통해 영어 실력 향상을 기대했다.",
+                synonyms: "brain plasticity, neural plasticity, malleability of the brain",
+                antonyms: "rigidity, inflexibility",
+                meaning: "뇌가소성, 신경가소성 (경험에 의해 뇌 구조가 변화하는 능력)"
+            },
+            {
+                word: "facilitate",
+                example: "스터디 그룹은 정보 공유와 질의응답을 통해 학습을 facilitate하고 편붕이의 합격 가능성을 높여주었다.",
+                synonyms: "aid, assist, ease, promote, expedite",
+                antonyms: "hinder, obstruct, impede",
+                meaning: "촉진하다, 용이하게 하다"
+            },
+            {
+                word: "cortical",
+                example: "편붕이는 cortical 기능을 향상시키기 위해 매일 아침 복잡한 논리 퍼즐을 푼다.",
+                synonyms: "cerebral, cerebellar",
+                antonyms: "non-cortical, subcortical",
+                meaning: "대뇌 피질의"
+            },
+            {
+                word: "archaeological",
+                example: "편붕이는 영어 어원을 공부하며, 마치 archaeological site를 발굴하는 고고학자처럼 단어의 역사를 파헤쳤다.",
+                synonyms: "ancient, historic, prehistoric",
+                antonyms: "modern, contemporary",
+                meaning: "고고학적인"
+            },
+            {
+                word: "dating",
+                example: "편붕이는 vocabulary 시험 점수 향상에 집중하느라 dating은 잠시 미뤄두기로 했다.",
+                synonyms: "courtship, romance, going out",
+                antonyms: "celibacy, abstinence",
+                meaning: "데이트, 교제"
+            },
+            {
+                word: "prehistoric",
+                example: "편붕이는 prehistoric 시대의 유물 발굴 이야기를 듣고 고고학자의 꿈을 키웠다.",
+                synonyms: "ancient, primeval, primordial",
+                antonyms: "modern, contemporary",
+                meaning: "선사 시대의"
+            },
+            {
+                word: "superficial",
+                example: "편붕이는 superficial한 지식 암기보다는 심도 있는 이해를 중시하는 공부법을 택했다.",
+                synonyms: "shallow, cursory, surface",
+                antonyms: "deep, profound",
+                meaning: "피상적인, 표면적인"
+            },
+            {
+                word: "exhaustive",
+                example: "편붕이는 시험 범위에 대한 exhaustive한 이해를 바탕으로 모든 문제를 풀어냈다.",
+                synonyms: "thorough, complete, comprehensive, in-depth",
+                antonyms: "incomplete, partial, superficial",
+                meaning: "철저한, 완전한"
+            },
+            {
+                word: "didactic",
+                example: "편붕이는 didactic한 어조의 강의를 들으며 필기를 했다.",
+                synonyms: "instructive, preceptive, moralistic",
+                antonyms: "uninformative, non-didactic",
+                meaning: "교훈적인, 설교적인"
+            },
+            {
+                word: "reductive",
+                example: "편붕이는 영어 문학 작품을 단순히 단어 뜻만으로 해석하는 reductive approach를 지양하고, 작품 전체의 맥락을 이해하려고 노력했다.",
+                synonyms: "simplistic, oversimplified, reductionist",
+                antonyms: "complex, nuanced",
+                meaning: "지나치게 단순화하는, 환원주의적인"
+            },
+            {
+                word: "nuance",
+                example: "영어 능력 향상의 핵심은 바로 nuance를 파악하는 것이라고 편붕이는 생각했다.",
+                synonyms: "subtlety, shade, distinction",
+                antonyms: "obviousness, blatancy",
+                meaning: "미묘한 차이, 뉘앙스"
+            },
+            {
+                word: "ostensibly",
+                example: "편붕이는 ostensibly 열심히 공부하는 척하지만, 실제로는 유튜브를 보고 있었다.",
+                synonyms: "apparently, seemingly, superficially",
+                antonyms: "actually, genuinely",
+                meaning: "표면상으로는"
+            },
+            {
+                word: "meritocracy",
+                example: "편붕이는 meritocracy를 믿기에 남들보다 두 배는 더 노력했다.",
+                synonyms: "ability system, talent system, performance-based system",
+                antonyms: "aristocracy, nepotism",
+                meaning: "능력주의"
+            },
+            {
+                word: "dismantle",
+                example: "편붕이는 모의고사에서 틀린 문제를 분석하기 위해 복잡한 문장 구조를 dismantle하고, 각 요소를 꼼꼼히 살펴보았다.",
+                synonyms: "take apart, disassemble, break down",
+                antonyms: "assemble, construct",
+                meaning: "분해하다, 해체하다"
+            },
+            {
+                word: "recast",
+                example: "편붕이는 틀린 문제를 다시 분석하며 풀이 전략을 recast했다.",
+                synonyms: "remodel, reshape, rework",
+                antonyms: "maintain, preserve",
+                meaning: "재구성하다, 바꾸다, 고쳐 만들다"
+            },
+            {
+                word: "virtue",
+                example: "편붕이는 꾸준함이라는 virtue 덕분에 어려운 편입 준비 과정을 잘 이겨낼 수 있었다.",
+                synonyms: "merit, strength, asset",
+                antonyms: "vice, shortcoming",
+                meaning: "미덕, 장점"
+            },
+            {
+                word: "hallmark",
+                example: "편붕이는 모든 모의고사에서 hallmark인 꼼꼼한 문제 풀이로 고득점을 받았다.",
+                synonyms: "characteristic, feature, trait, mark",
+                antonyms: "defect, flaw",
+                meaning: "품질 보증 마크, 특징"
+            },
+            {
+                word: "pseudoscience",
+                example: "편붕이는 인터넷에서 흔히 볼 수 있는 pseudoscience, 즉 '자면서 영어 공부하기' 같은 학습법에 현혹되지 않고, 정석대로 공부하기로 결심했다.",
+                synonyms: "quackery, false science, junk science",
+                antonyms: "science, scientific method",
+                meaning: "사이비 과학, 유사 과학"
+            },
+            {
+                word: "paucity",
+                example: "편붕이는 paucity of sleep에도 불구하고 매일 아침 영어 단어를 외웠다.",
+                synonyms: "scarcity, lack, dearth, shortage",
+                antonyms: "abundance, plenty, surfeit",
+                meaning: "소량, 부족, 결핍"
+            },
+            {
+                word: "treatise",
+                example: "편붕이는 영문학 전공을 꿈꾸며 Chaucer의 Canterbury Tales에 대한 treatise를 꼼꼼히 읽었다.",
+                synonyms: "essay, dissertation, monograph",
+                antonyms: "pamphlet, article",
+                meaning: "논문, 전문 서적"
+            },
+            {
+                word: "erudition",
+                example: "편붕이는 영어 지문에서 셰익스피어를 인용하며 erudition을 뽐냈지만, 사실 네이버 검색 결과였다.",
+                synonyms: "knowledge, scholarship, learning",
+                antonyms: "ignorance, illiteracy",
+                meaning: "박식함, 학식"
+            },
+            {
+                word: "theoretical",
+                example: "편붕이는 theoretical lectures보다 실전 문제 풀이를 선호했다.",
+                synonyms: "abstract, hypothetical, conjectural",
+                antonyms: "practical, empirical",
+                meaning: "이론적인"
+            },
+            {
+                word: "sophistry",
+                example: "편붕이는 온라인 댓글에서 sophistry로 가득 찬 주장을 발견하고 반박 증거를 찾기 시작했다.",
+                synonyms: "fallacy, casuistry, deception",
+                antonyms: "logic, truth",
+                meaning: "궤변"
+            },
+            {
+                word: "galvanize",
+                example: "편붕이는 꿈꿔왔던 대학 합격 스토리를 읽고 완전히 galvanize되어 다시 책상 앞에 앉았다.",
+                synonyms: "stimulate, energize, spur, rouse",
+                antonyms: "demotivate, discourage",
+                meaning: "자극하여 행동하게 하다"
+            },
+            {
+                word: "platitude",
+                example: "편붕이는 면접 스터디에서 \"I will do my best\"와 같은 platitude를 말하는 대신, 구체적인 경험을 바탕으로 자신의 강점을 어필했다.",
+                synonyms: "cliché, banality, truism",
+                antonyms: "originality, novelty",
+                meaning: "진부한 표현, 상투적인 말"
+            },
+            {
+                word: "circumlocution",
+                example: "편붕이는 면접관의 질문에 circumlocution을 사용하지 않고, 솔직하게 자신의 생각을 전달했다.",
+                synonyms: "euphemism, indirectness, periphrasis",
+                antonyms: "directness, brevity",
+                meaning: "우회적인 표현"
+            },
+            {
+                word: "allay",
+                example: "편붕이는 모의고사 성적이 좋지 않아 불안했지만, 스터디 그룹 친구들의 격려가 그의 걱정을 allay해주었다.",
+                synonyms: "reduce, alleviate, mitigate",
+                antonyms: "aggravate, intensify",
+                meaning: "가라앉히다, 진정시키다"
+            },
+            {
+                word: "verbosity",
+                example: "편붕이는 면접 연습에서 verbosity를 줄이기 위해 간결하게 대답하는 훈련을 했다.",
+                synonyms: "loquacity, wordiness, prolixity",
+                antonyms: "conciseness, brevity",
+                meaning: "장황함, 다변"
+            },
+            {
+                word: "exacerbate",
+                example: "편붕이는 밤샘 공부로 이미 피곤한 상태였는데, 카페인 과다 섭취가 그의 피로를 exacerbate하여 결국 졸도했다.",
+                synonyms: "aggravate, worsen, intensify",
+                antonyms: "alleviate, improve",
+                meaning: "악화시키다"
+            },
+            {
+                word: "scrutinize",
+                example: "편붕이는 모의고사 오답 노트를 scrutinize하며 자신의 약점을 분석했다.",
+                synonyms: "examine, inspect, investigate",
+                antonyms: "skim, glance",
+                meaning: "면밀히 조사하다"
+            },
+            {
+                word: "dissemination",
+                example: "편붕이는 시험 직후, 기출문제 분석 자료를 스터디 그룹 단톡방에 dissemination하여 모두에게 도움을 주었다.",
+                synonyms: "distribution, spreading, diffusion, propagation",
+                antonyms: "suppression, concealment",
+                meaning: "퍼뜨림, 전파"
+            },
+            {
+                word: "dissent",
+                example: "스터디 그룹에서 모든 사람들이 모의고사 문제에 대한 답으로 5번을 고를 때, 편붕이는 혼자 dissent하고 3번을 주장했다.",
+                synonyms: "differ, disagree, object",
+                antonyms: "agree, consent",
+                meaning: "반대하다"
+            },
+            {
+                word: "consensus",
+                example: "스터디 그룹에서 다음 모의고사 날짜에 대한 consensus를 얻기 위해, 편붕이는 다양한 의견을 조율하며 투표를 제안했다.",
+                synonyms: "agreement, accord, harmony, unanimity",
+                antonyms: "disagreement, discord, conflict",
+                meaning: "합의, 의견 일치"
+            },
+            {
+                word: "heterodoxy",
+                example: "스터디 그룹에서 한 편붕이가 교수의 해석에 맞서는 heterodoxy를 주장했지만, 바로 반박당했다.",
+                synonyms: "heresy, dissidence, unorthodoxy",
+                antonyms: "orthodoxy, conformity",
+                meaning: "이단, 이설"
+            },
+            {
+                word: "extol",
+                example: "스터디 그룹에서 편붕이는 어려운 논리 문제를 명쾌하게 풀어낸 친구를 extol했다.",
+                synonyms: "praise, laud, commend, glorify",
+                antonyms: "criticize, condemn",
+                meaning: "극찬하다"
+            },
+            {
+                word: "elucidation",
+                example: "편붕이는 모의고사 오답 노트에 선생님의 elucidation을 꼼꼼히 받아 적었다.",
+                synonyms: "explanation, clarification, explication",
+                antonyms: "obfuscation, confusion",
+                meaning: "설명, 해명"
+            },
+            {
+                word: "penalize",
+                example: "편붕이는 시험 시간에 부정행위를 하다가 penalize되어 0점 처리되었다.",
+                synonyms: "punish, discipline, handicap",
+                antonyms: "reward, benefit",
+                meaning: "벌칙을 주다, 불리하게 하다"
+            },
+            {
+                word: "pragmatic",
+                example: "편붕이는 막연한 꿈보다 pragmatic한 계획을 세워 공부하기 시작했다.",
+                synonyms: "practical, realistic, down-to-earth",
+                antonyms: "idealistic, impractical",
+                meaning: "실용적인"
+            },
+            {
+                word: "repugnant",
+                example: "편붕이는 문법 오답 노트를 다시 보는 것이 repugnant했지만, 실력 향상을 위해 꾹 참고 복습했다.",
+                synonyms: "offensive, disgusting, repulsive",
+                antonyms: "pleasant, agreeable",
+                meaning: "불쾌한, 역겨운"
+            },
+            {
+                word: "utilitarianism",
+                example: "편붕이는 모든 선택의 순간마다 최대 다수의 최대 행복을 추구하는 utilitarianism적인 접근으로 시간표를 짜고, 스터디 그룹을 선택했다.",
+                synonyms: "pragmatism, expediency, practicality",
+                antonyms: "altruism, idealism",
+                meaning: "공리주의"
+            },
+            {
+                word: "aggregate",
+                example: "편붕이는 하루 동안 공부한 시간을 aggregate해서 스터디 플래너에 적었다.",
+                synonyms: "accumulate, combine, amass, gather",
+                antonyms: "separate, divide, disperse",
+                meaning: "모두 합치다, 총계"
+            },
+            {
+                word: "vulnerable",
+                example: "편붕이는 문법에 vulnerable해서 문법 문제를 풀 때마다 긴장했다.",
+                synonyms: "susceptible, weak, fragile",
+                antonyms: "resilient, strong",
+                meaning: "취약한, 연약한"
+            },
+            {
+                word: "subordinate",
+                example: "편붕이는 스터디 그룹에서 subordinate 역할을 자처하며 리더를 도왔다.",
+                synonyms: "dependent, secondary, inferior",
+                antonyms: "superior, dominant",
+                meaning: "종속적인, 부하의; 하급자"
+            },
+            {
+                word: "ambiguous",
+                example: "해설지를 봐도 답이 ambiguous해서 편붕이는 혼란에 빠졌다.",
+                synonyms: "unclear, vague, equivocal, obscure",
+                antonyms: "clear, precise, explicit, obvious",
+                meaning: "애매모호한, 여러 가지로 해석될 수 있는"
+            },
+            {
+                word: "immune",
+                example: "여러 번의 실패에도 불구하고, 편붕이는 낙담에 immune한 듯 다시 책을 펼쳤다.",
+                synonyms: "resistant, impervious, exempt",
+                antonyms: "susceptible, vulnerable",
+                meaning: "면역의, 영향을 받지 않는"
+            },
+            {
+                word: "celestial",
+                example: "편붕이는 천문학 다큐멘터리를 보며 celestial bodies의 아름다움에 감탄했다.",
+                synonyms: "heavenly, astronomical, cosmic",
+                antonyms: "earthly, terrestrial",
+                meaning: "하늘의, 천체의"
+            },
+            {
+                word: "astrology",
+                example: "편붕이는 휴식 시간에 astrology 관련 유튜브 영상을 보며 재미로 자신의 미래를 점쳐보았다.",
+                synonyms: "horoscopy, astromancy, zodiac",
+                antonyms: "astronomy, science",
+                meaning: "점성술, 점성학"
+            },
+            {
+                word: "captivate",
+                example: "영어 지문 속 intricate plot twists가 편붕이의 마음을 captivate하여 밤새도록 읽게 만들었다.",
+                synonyms: "enchant, fascinate, mesmerize",
+                antonyms: "bore, repel",
+                meaning: "마음을 사로잡다"
+            },
+            {
+                word: "planetary",
+                example: "편붕이는 planetary scale의 지구 온난화 문제에 관심이 많아 환경 관련 다큐멘터리를 시청했다.",
+                synonyms: "global, earthly, terrestrial",
+                antonyms: "cosmic, universal",
+                meaning: "행성의, 지구의"
+            },
+            {
+                word: "alignment",
+                example: "편붕이는 시험 시간을 최대한 활용하기 위해 스터디 플랜과 자신의 생활 리듬의 alignment를 꼼꼼하게 맞춰갔다.",
+                synonyms: "accordance, harmony, concord",
+                antonyms: "disagreement, discord",
+                meaning: "정렬, 일치"
+            },
+            {
+                word: "intrinsic",
+                example: "편붕이는 영어 공부의 intrinsic motivation을 잃지 않기 위해 매일 영어 원서를 읽었다.",
+                synonyms: "inherent, innate, essential, built-in",
+                antonyms: "extrinsic, external, acquired",
+                meaning: "고유한, 본질적인"
+            },
+            {
+                word: "compromise",
+                example: "편붕이는 잠을 줄여서 공부하는 것과 충분히 자는 것 사이에서 compromise를 보아 6시간만 자기로 했다.",
+                synonyms: "negotiate, concede, settle",
+                antonyms: "resist, maintain",
+                meaning: "타협하다, 위태롭게 하다"
+            },
+            {
+                word: "supersede",
+                example: "편붕이는 기존의 단어 암기법을 새로운 Anki 플래시 카드 시스템으로 supersede했다.",
+                synonyms: "replace, supplant, displace",
+                antonyms: "retain, preserve",
+                meaning: "대체하다"
+            },
+            {
+                word: "subjugated",
+                example: "편붕이는 작년의 실패에 대한 생각에 subjugated되어 슬럼프를 겪었지만, 다시 용기를 내어 도전하기로 결심했다.",
+                synonyms: "conquered, dominated, subdued",
+                antonyms: "liberated, freed",
+                meaning: "정복된, 지배된"
+            },
+            {
+                word: "augment",
+                example: "편붕이는 부족한 어휘력을 augment하기 위해 매일 단어 100개씩 외우기로 결심했다.",
+                synonyms: "increase, expand, enhance, boost",
+                antonyms: "decrease, diminish, reduce, curtail",
+                meaning: "늘리다, 증가시키다"
+            },
+            {
+                word: "in itself",
+                example: "편붕이는 영어 단어 암기 자체가 in itself 큰 만족감을 준다고 생각했다.",
+                synonyms: "intrinsically, essentially, per se",
+                antonyms: "extrinsically, incidentally",
+                meaning: "그 자체로"
+            },
+            {
+                word: "at a loss",
+                example: "모든 문제집을 세 번씩이나 풀었는데도 계속 틀리자 편붕이는 at a loss였다.",
+                synonyms: "perplexed, puzzled, confused",
+                antonyms: "certain, confident",
+                meaning: "어쩔 줄 몰라 하는"
+            },
+            {
+                word: "be worth doing",
+                example: "편붕이는 '해커스 보카'를 외우는 것이 be worth doing 하다고 생각했다.",
+                synonyms: "be worthy of doing, deserve to be done, merit doing",
+                antonyms: "be not worth doing, be worthless",
+                meaning: "~할 가치가 있다"
+            },
+            {
+                word: "be troubled by",
+                example: "편붕이는 좀처럼 오르지 않는 영어 점수에 be troubled by 계속 괴로워했다.",
+                synonyms: "be bothered by, be distressed by, be worried by",
+                antonyms: "be pleased with, be satisfied with",
+                meaning: "~으로 괴로워하다"
+            },
+            {
+                word: "seminal",
+                example: "편붕이는 Chomsky의 seminal work인 『Syntactic Structures』를 읽고 언어학에 대한 새로운 관점을 얻었다.",
+                synonyms: "influential, important, groundbreaking, pivotal",
+                antonyms: "insignificant, trivial",
+                meaning: "영향력이 큰; 중요한"
+            },
+            {
+                word: "enterprise",
+                example: "편붕이는 대기업 취업을 목표로 삼아, 그에 걸맞은 enterprise를 발휘하여 스터디 그룹을 만들고 주도적으로 학습 계획을 세웠다.",
+                synonyms: "venture, initiative, undertaking",
+                antonyms: "inaction, passivity",
+                meaning: "기업, 사업; 진취성, 모험심"
+            },
+            {
+                word: "characterize",
+                example: "편붕이의 공부 스타일은 꼼꼼함과 성실함이 characterize한다.",
+                synonyms: "define, distinguish, mark",
+                antonyms: "confuse, misrepresent",
+                meaning: "특징짓다, ~의 특징을 나타내다"
+            },
+            {
+                word: "upheaval",
+                example: "코로나19로 인한 교육 시스템의 upheaval 속에서도 편붕이는 꿋꿋이 자신의 학습 계획을 지켜나갔다.",
+                synonyms: "disruption, turmoil, upset",
+                antonyms: "stability, calm",
+                meaning: "격변, 대변동"
+            },
+            {
+                word: "anomaly",
+                example: "편붕이는 모의고사 성적이 갑자기 떨어지자 이 anomaly를 분석하기 위해 오답 노트를 꼼꼼히 살펴보았다.",
+                synonyms: "abnormality, irregularity, deviation, oddity",
+                antonyms: "norm, regularity",
+                meaning: "변칙, 이례적인 것"
+            },
+            {
+                word: "precipitate",
+                example: "편붕이는 갑작스러운 휴교령이 모든 계획을 precipitate할까 봐 걱정했다.",
+                synonyms: "trigger, accelerate, hasten",
+                antonyms: "delay, hinder",
+                meaning: "촉발시키다, 재촉하다"
+            },
+            {
+                word: "incommensurability",
+                example: "편붕이는 수능과 편입 영어의 incommensurability를 인정하고 각 시험에 맞는 전략을 세웠다.",
+                synonyms: "incomparability, disparity, difference, divergence",
+                antonyms: "commensurability, comparability, similarity, compatibility",
+                meaning: "측정 불가능성, 비교 불가능성"
+            },
+            {
+                word: "temperance movement",
+                example: "편붕이는 스스로 'temperance movement'를 시작하며, 시험 전날까지는 콜라도 끊었다.",
+                synonyms: "abstinence movement, prohibition movement, teetotalism",
+                antonyms: "indulgence, excess",
+                meaning: "절제 운동 (특히 미국에서 과거 있었던 금주 운동)"
+            },
+            {
+                word: "gain momentum",
+                example: "편붕이는 꾸준한 노력으로 영어 실력이 gain momentum하여, 드디어 모의고사에서 1등급을 달성했다.",
+                synonyms: "accelerate, gain speed, pick up speed, build up speed",
+                antonyms: "lose momentum, slow down, decelerate",
+                meaning: "탄력을 받다, 가속도가 붙다"
+            },
+            {
+                word: "fuel",
+                example: "편붕이는 열정을 fuel하기 위해 매일 아침 영어 원서를 읽었다.",
+                synonyms: "energize, power, stimulate",
+                antonyms: "extinguish, dampen",
+                meaning: "연료를 공급하다; 부추기다"
+            },
+            {
+                word: "culminate in",
+                example: "편붕이의 몇 달간의 노력은 결국 합격이라는 값진 결과로 culminate in했다.",
+                synonyms: "result in, end in, lead to, conclude with",
+                antonyms: "begin with, start with, originate from",
+                meaning: "결국 ~하게 되다, ~으로 끝나다"
+            },
+            {
+                word: "ratification",
+                example: "편붕이는 드디어 꿈에 그리던 대학교 편입 합격 ratification을 받고 기쁨의 눈물을 흘렸다.",
+                synonyms: "approval, confirmation, validation",
+                antonyms: "rejection, denial",
+                meaning: "비준, 승인"
+            },
+            {
+                word: "immense",
+                example: "편붕이는 immense 양의 어휘를 외우기 위해 매일 밤낮으로 노력했다.",
+                synonyms: "huge, enormous, vast, massive",
+                antonyms: "tiny, small, minuscule",
+                meaning: "엄청난, 거대한"
+            },
+            {
+                word: "notorious",
+                example: "편붕이는 notorious한 난이도의 어휘 문제를 맞히고 환호했다.",
+                synonyms: "infamous, disreputable, ill-famed",
+                antonyms: "famous, celebrated",
+                meaning: "악명 높은, (나쁜 의미로) 유명한"
+            },
+            {
+                word: "speakeasy",
+                example: "편붕이는 시험 스트레스를 풀기 위해 친구들과 speakeasy에 가서 몰래 맥주를 마셨다.",
+                synonyms: "blind pig, blind tiger, gin mill",
+                antonyms: "licensed bar, pub",
+                meaning: "무허가 술집, 비밀 술집"
+            },
+            {
+                word: "repeal",
+                example: "교육부 장관은 편입 영어 시험에서 논란이 많았던 지문을 repeal하기로 결정했다.",
+                synonyms: "revoke, rescind, annul, cancel",
+                antonyms: "enact, establish, implement",
+                meaning: "폐지하다, 철회하다"
+            },
+            {
+                word: "historiographical",
+                example: "편붕이는 한국사 시험을 위해 historiographical research를 활용하여 조선시대 과거 제도에 대해 분석했다.",
+                synonyms: "historical, chronicled, documented",
+                antonyms: "ahistorical, fictional",
+                meaning: "사료 편찬학의, 역사 기록학적인"
+            },
+            {
+                word: "Intentionalist",
+                example: "편붕이는 모든 것을 의도한 대로 해야 하는 Intentionalist 성향 때문에 모든 오답노트를 색깔과 중요도에 따라 분류했다.",
+                synonyms: "purposeful, deliberate, conscious",
+                antonyms: "accidental, unintentional",
+                meaning: "의도주의자"
+            },
+            {
+                word: "antisemitic",
+                example: "편붕이는 온라인 커뮤니티에서 antisemitic 발언을 하는 사람들을 보고 깜짝 놀랐다.",
+                synonyms: "anti-Jewish, prejudiced, discriminatory, bigoted",
+                antonyms: "tolerant, accepting",
+                meaning: "반유대주의의"
+            },
+            {
+                word: "top down",
+                example: "편붕이는 복잡한 문법 구조를 이해하기 위해 top down 방식으로 분석하며 큰 그림을 먼저 파악한 후 세부적인 내용을 살펴보았다.",
+                synonyms: "hierarchical, descending, deductive",
+                antonyms: "bottom-up, ascending, inductive",
+                meaning: "하향식의, 위에서 아래로의"
+            },
+            {
+                word: "posit",
+                example: "편붕이는 어려운 논리 문제를 풀기 위해 먼저 주어진 정보가 모두 사실이라고 posit하고 문제에 접근했다.",
+                synonyms: "assume, postulate, hypothesize",
+                antonyms: "deny, refute",
+                meaning: "사실로 상정하다, 가정하다"
+            },
+            {
+                word: "improvisational",
+                example: "편붕이는 예상치 못한 질문에 당황하지 않고 improvisational skills를 발휘하여 답변을 이어나갔다.",
+                synonyms: "off-the-cuff, extemporaneous, ad-lib",
+                antonyms: "planned, rehearsed",
+                meaning: "즉흥적인"
+            },
+            {
+                word: "bureaucracy",
+                example: "편붕이는 복잡한 장학금 신청 과정에 bureaucracy를 느끼고 한숨을 쉬었다.",
+                synonyms: "red tape, officialdom, paperwork",
+                antonyms: "efficiency, streamlining",
+                meaning: "관료주의, 복잡한 행정 절차"
+            },
+            {
+                word: "prerequisite",
+                example: "편붕이는 교수님께 prerequisite인 선수 과목을 미리 들어야 수업을 따라갈 수 있다는 안내를 받았다.",
+                synonyms: "requirement, precondition, essential",
+                antonyms: "optional, nonessential",
+                meaning: "전제 조건, 필수 과목"
+            },
+            {
+                word: "fragmented",
+                example: "편붕이는 fragmented된 지식들을 하나로 연결하기 위해 노력했다.",
+                synonyms: "broken, scattered, disjointed",
+                antonyms: "whole, unified",
+                meaning: "조각난, 단편적인"
+            },
+            {
+                word: "logistical",
+                example: "편붕이는 시험장까지의 교통편, 숙박 등 logistical 문제들을 미리 확인하여 시험 당일 차질이 없도록 준비했다.",
+                synonyms: "organizational, operational, practical",
+                antonyms: "theoretical, impractical",
+                meaning: "물류적인, 실행상의"
+            },
+            {
+                word: "fanatical",
+                example: "편붕이는 영어 단어 암기에 fanatical하여 매일 새벽 4시에 일어나 공부했다.",
+                synonyms: "obsessive, zealous, fervent",
+                antonyms: "apathetic, indifferent",
+                meaning: "열광적인, 광적인"
+            },
+            {
+                word: "epistemology",
+                example: "편붕이는 영어 지문을 읽을 때, 단순히 내용 파악을 넘어 epistemology적 관점에서 글쓴이의 의도와 근거를 분석하려고 노력했다.",
+                synonyms: "theory of knowledge, gnoseology, philosophy of knowledge",
+                antonyms: "ignorance, nescience",
+                meaning: "인식론"
+            },
+            {
+                word: "vacuous",
+                example: "편붕이는 시험 직전에 vacuous expression으로 중요한 공식을 잊어버린 것을 깨달았다.",
+                synonyms: "empty, blank, inane",
+                antonyms: "intelligent, meaningful",
+                meaning: "멍청한, 얼빠진"
+            },
+            {
+                word: "substance",
+                example: "편붕이는 motivational speech의 내용은 좋았지만, substance가 부족하다고 느꼈다.",
+                synonyms: "essence, gist, core, meaning",
+                antonyms: "superficiality, insignificance",
+                meaning: "실체, 본질, 내용, 물질"
+            },
+            {
+                word: "probabilistic",
+                example: "편붕이는 시험에 나올 probabilistic한 어휘들을 따로 정리해서 외웠다.",
+                synonyms: "random, stochastic, uncertain",
+                antonyms: "deterministic, certain",
+                meaning: "확률적인"
+            },
+            {
+                word: "semantic",
+                example: "편붕이는 semantic 차이를 이해하지 못해 단어의 미묘한 뉘앙스를 놓치고 틀린 답을 골랐다.",
+                synonyms: "meaningful, connotative, significant",
+                antonyms: "meaningless, insignificant",
+                meaning: "의미론적인"
+            },
+            {
+                word: "proliferation",
+                example: "편붕이는 최근 유튜브에 편입 영어 관련 정보 proliferation을 보고 어떤 강의를 들어야 할지 혼란스러워했다.",
+                synonyms: "increase, growth, expansion, spread",
+                antonyms: "decrease, reduction, decline",
+                meaning: "급증, 확산"
+            },
+            {
+                word: "decouple",
+                example: "편붕이는 영어 공부에 대한 스트레스를 잠시 decouple하고 게임을 즐겼다.",
+                synonyms: "separate, disconnect, detach",
+                antonyms: "connect, combine, link",
+                meaning: "분리하다, 떼어놓다"
+            },
+            {
+                word: "discursive",
+                example: "편붕이는 discursive 생각들을 잠시 접어두고, 오늘의 어휘 암기 목표를 달성하기 위해 노력했다.",
+                synonyms: "rambling, digressive, wandering",
+                antonyms: "concise, focused",
+                meaning: "산만한, 두서없는"
+            },
+            {
+                word: "contingent",
+                example: "편붕이의 합격 여부는 contingent upon his performance in the upcoming exam and his interview score.",
+                synonyms: "dependent, conditional, subject to",
+                antonyms: "independent, unconditional",
+                meaning: "조건부의, 우발적인; ~에 따라 달라지는"
+            },
+            {
+                word: "terrifying",
+                example: "편붕이는 난생 처음 보는 terrifying 난이도의 편입 영어 시험지를 받고 심장이 철렁했다.",
+                synonyms: "frightening, scary, horrifying",
+                antonyms: "comforting, reassuring",
+                meaning: "무서운, 겁나게 하는"
+            },
+            {
+                word: "plunge",
+                example: "편붕이는 편입 영어의 깊은 바다에 plunge 하기 위해 마음의 준비를 단단히 했다.",
+                synonyms: "dive, jump, plummet",
+                antonyms: "rise, ascend",
+                meaning: "뛰어들다, 급락하다"
+            },
+            {
+                word: "mince words",
+                example: "편붕이는 교수님께 첨삭받을 때 mince words하지 않고 솔직하게 자신의 어려움을 이야기했다.",
+                synonyms: "be frank, be candid, be blunt, be straightforward",
+                antonyms: "equivocate, beat around the bush",
+                meaning: "말을 돌려서 하지 않다; 솔직하게 말하다"
+            },
+            {
+                word: "depression",
+                example: "편붕이는 몇 달째 계속되는 불합격에 depression에 빠져 거의 아무것도 하지 못했다.",
+                synonyms: "dejection, melancholy, gloom",
+                antonyms: "elation, joy",
+                meaning: "우울증, 의기소침"
+            },
+            {
+                word: "for all practical purposes",
+                example: "For all practical purposes, 편붕이는 방대한 어휘 암기량에 압도되어 며칠간 시험 공부를 손 놓고 게임에 빠져 살았다.",
+                synonyms: "in effect, essentially, virtually",
+                antonyms: "theoretically, hypothetically",
+                meaning: "사실상, 거의"
+            },
+            {
+                word: "persuade",
+                example: "스터디 그룹에서 발표를 맡게 된 편붕이는 긴장했지만, 자신감을 가지라고 persuade하는 친구들 덕분에 용기를 얻었다.",
+                synonyms: "convince, induce, coax",
+                antonyms: "dissuade, deter",
+                meaning: "설득하다"
+            },
+            {
+                word: "in its tracks",
+                example: "편붕이는 갑자기 울린 휴대폰 소리에 집중력이 in its tracks 멈춰버렸다.",
+                synonyms: "immediately, instantly, right away, abruptly",
+                antonyms: "gradually, slowly",
+                meaning: "즉시, 당장에"
+            },
+            {
+                word: "liquidity",
+                example: "편붕이는 등록금 마련을 위해 주식의 liquidity가 높은 종목에 투자했다.",
+                synonyms: "fluidity, convertibility, cash availability",
+                antonyms: "illiquidity, frozen assets",
+                meaning: "유동성, 현금화 가능성"
+            },
+            {
+                word: "on behalf of",
+                example: "스터디 그룹 발표에서 편붕이는 팀원들을 on behalf of하여 프로젝트 결과를 설명했다.",
+                synonyms: "in place of, in the name of, representing",
+                antonyms: "against, contradicting",
+                meaning: "~을 대신하여, ~을 대표하여"
+            },
+            {
+                word: "scarce",
+                example: "편붕이는 주말에도 쉴 틈이 scarce해서 스터디 카페로 향했다.",
+                synonyms: "rare, scanty, meager, insufficient",
+                antonyms: "abundant, plentiful",
+                meaning: "부족한, 드문"
+            },
+            {
+                word: "in free fall",
+                example: "편붕이's motivation was in free fall after failing the midterm exam, so he went to eat tteokbokki to cheer himself up.",
+                synonyms: "plummeting, tumbling, nosediving",
+                antonyms: "rising, soaring",
+                meaning: "급락하는, 폭락하는"
+            },
+            {
+                word: "refute",
+                example: "편붕이는 교수님의 주장에 대해 명확한 근거를 들어 refute했다.",
+                synonyms: "disprove, contradict, rebut",
+                antonyms: "confirm, corroborate",
+                meaning: "반박하다, 논박하다"
+            },
+            {
+                word: "fiscal policy",
+                example: "편붕이는 뉴스에서 government spending에 대한 fiscal policy debates를 보며 한숨을 쉬었다. \"내 등록금도 걱정인데 나라 경제까지 걱정해야 하다니!\"",
+                synonyms: "government spending policy, budgetary policy, tax policy",
+                antonyms: "monetary policy, laissez-faire economics",
+                meaning: "재정 정책"
+            },
+            {
+                word: "deficit spending",
+                example: "편붕이는 교재 구입으로 인한 deficit spending 때문에 한 달 동안 라면만 먹어야 했다.",
+                synonyms: "overspending, budget deficit, red ink",
+                antonyms: "surplus spending, budget surplus",
+                meaning: "적자 지출"
+            },
+            {
+                word: "revival",
+                example: "최근 편입 영어 시험에서 idiom 문제들이 revival하는 추세라 편붕이는 idiom 공부에 집중했다.",
+                synonyms: "renewal, resurgence, restoration",
+                antonyms: "decline, fall",
+                meaning: "부활, 재유행"
+            },
+            {
+                word: "demographic",
+                example: "편붕이는 지원하고자 하는 대학의 demographic을 분석하여 경쟁률과 입학 가능성을 예측했다.",
+                synonyms: "population statistics, population data, census data",
+                antonyms: "",
+                meaning: "인구 통계학의, 인구 통계"
+            },
+            {
+                word: "unprecedented",
+                example: "편붕이는 unprecedented level의 어휘력 향상을 위해 매일 영어 단어 100개를 외웠다.",
+                synonyms: "unparalleled, novel, unexampled",
+                antonyms: "common, ordinary",
+                meaning: "전례 없는, 유례없는"
+            },
+            {
+                word: "hub",
+                example: "스터디 카페는 편붕이들의 정보 교환의 hub 역할을 한다.",
+                synonyms: "center, core, focus",
+                antonyms: "periphery, edge",
+                meaning: "중심, 중추"
+            },
+            {
+                word: "champion",
+                example: "편붕이는 드디어 편입 영어 시험에서 champion 자리를 차지했다.",
+                synonyms: "winner, victor, advocate, supporter",
+                antonyms: "loser, opponent, rival",
+                meaning: "챔피언, 우승자, 옹호자"
+            },
+            {
+                word: "uplift",
+                example: "편붕이는 최근 점수 향상에 uplift되어 더욱 열심히 공부하기로 결심했다.",
+                synonyms: "boost, encourage, inspire",
+                antonyms: "depress, discourage",
+                meaning: "희망을 주다, 고양시키다"
+            },
+            {
+                word: "propaganda",
+                example: "편붕이는 인터넷에서 쏟아지는 각종 대학의 홍보 propaganda를 접하고, 어디로 편입할지 더욱 고민에 빠졌다.",
+                synonyms: "information, promotion, advertising",
+                antonyms: "truth, reality",
+                meaning: "선전, 정치적 선동"
+            },
+            {
+                word: "counter",
+                example: "편붕이는 억울한 점수 오류에 대해 강력하게 counter하기 위해 증거 자료를 모았다.",
+                synonyms: "oppose, rebut, challenge",
+                antonyms: "support, agree",
+                meaning: "반박하다, 대응하다"
+            },
+            {
+                word: "demeaning",
+                example: "편붕이는 드디어 합격 후, 과거 자신을 demeaning했던 악플들을 웃으며 넘길 수 있었다.",
+                synonyms: "humiliating, degrading, belittling",
+                antonyms: "respectful, complimentary",
+                meaning: "비하하는, 품위를 손상시키는"
+            },
+            {
+                word: "prescriptive",
+                example: "편붕이는 교수님의 prescriptive 조언에 따라 공부 계획을 수정했다.",
+                synonyms: "normative, regulative, authoritative",
+                antonyms: "descriptive, suggestive",
+                meaning: "규범적인, 지시하는"
+            },
+            {
+                word: "unvarnished",
+                example: "편붕이는 면접에서 unvarnished truth를 말하는 것이 중요하다고 생각했다.",
+                synonyms: "frank, candid, straightforward",
+                antonyms: "polished, embellished",
+                meaning: "꾸밈없는, 있는 그대로의"
+            },
+            {
+                word: "folk tradition",
+                example: "편붕이는 설날에 할머니 댁에 가서 세배하는 한국의 folk tradition을 지키기 위해 시험 직전에도 잠시 고향에 다녀왔다.",
+                synonyms: "custom, lore, heritage",
+                antonyms: "modernity, innovation",
+                meaning: "민속 전통"
+            },
+            {
+                word: "curtail",
+                example: "편붕이는 늘어만 가는 공부 시간 때문에 취미 생활을 curtail해야 했다.",
+                synonyms: "reduce, shorten, decrease, diminish",
+                antonyms: "increase, expand, extend, prolong",
+                meaning: "줄이다, 축소하다"
+            },
+            {
+                word: "patronage",
+                example: "편붕이는 유명 영어 강사의 patronage 덕분에 좋은 스터디 자료를 얻을 수 있었다.",
+                synonyms: "support, backing, sponsorship, auspices, custom",
+                antonyms: "opposition, boycott",
+                meaning: "후원, 지원, 단골손님"
+            },
+            {
+                word: "lay the foundation for",
+                example: "편붕이는 영어 어휘 실력 향상을 위해 매일 단어 암기를 하면서, 미래의 편입 성공에 lay the foundation for 그의 성공을 위한 기초를 쌓고 있다.",
+                synonyms: "establish the basis for, create the groundwork for",
+                antonyms: "undermine, disrupt",
+                meaning: "…의 기초를 놓다"
+            },
+            {
+                word: "dogma",
+                example: "편붕이는 영어 학습에는 왕도가 없다는 선생님의 dogma에 따라 꾸준히 어휘를 암기했다.",
+                synonyms: "doctrine, tenet, credo",
+                antonyms: "heterodoxy, unbelief",
+                meaning: "독단적인 신조, 교리"
+            },
+            {
+                word: "empirical",
+                example: "편붕이는 단어 암기가 어려울 때, 단순히 여러 번 쓰는 것보다 예문을 통해 empirical하게 학습하는 것이 효과적이라는 것을 깨달았다.",
+                synonyms: "observed, experiential, practical",
+                antonyms: "theoretical, hypothetical",
+                meaning: "경험적인, 실증적인"
+            },
+            {
+                word: "take for granted",
+                example: "편붕이는 부모님의 지원을 take for granted했지만, 어느 날 갑자기 택배 배달 아르바이트를 시작하며 그 고마움을 깨달았다.",
+                synonyms: "assume, presume, expect",
+                antonyms: "appreciate, value",
+                meaning: "당연하게 여기다"
+            },
+            {
+                word: "precedence",
+                example: "편붕이는 단어 암기보다 독해 공부에 precedence를 두기로 했다.",
+                synonyms: "priority, preference, superiority",
+                antonyms: "inferiority, subordination",
+                meaning: "우선순위, 선행"
+            },
+            {
+                word: "go beyond",
+                example: "편붕이는 단순히 시험 합격을 go beyond하여, 전공 분야의 전문가가 되는 것을 꿈꿨다.",
+                synonyms: "exceed, surpass, transcend",
+                antonyms: "fall short of, lag behind",
+                meaning: "넘어서다, 초월하다"
+            }
+        ];
+
+        // 카드 뷰 렌더링
+        function renderCards(filteredWords = words) {
+            const cardView = document.getElementById('cardView');
+            cardView.innerHTML = '';
+            
+            filteredWords.forEach(word => {
+                const card = document.createElement('div');
+                card.className = 'word-card';
+                card.innerHTML = `
+                    <div class="word-title">${word.word}</div>
+                    <div class="word-example">${word.example}</div>
+                    <div class="word-relations">
+                        <div class="relation-box synonyms">
+                            <div class="relation-label">동의어</div>
+                            ${word.synonyms}
+                        </div>
+                        <div class="relation-box antonyms">
+                            <div class="relation-label">반의어</div>
+                            ${word.antonyms}
+                        </div>
+                    </div>
+                    <div class="word-meaning">${word.meaning}</div>
+                `;
+                cardView.appendChild(card);
+            });
+        }
+
+        // 테이블 뷰 렌더링
+        function renderTable(filteredWords = words) {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+            
+            filteredWords.forEach(word => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${word.word}</td>
+                    <td>${word.example}</td>
+                    <td>${word.synonyms}</td>
+                    <td>${word.antonyms}</td>
+                    <td>${word.meaning}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // 뷰 전환
+        function showView(view) {
+            const cardView = document.getElementById('cardView');
+            const tableView = document.getElementById('tableView');
+            const testView = document.getElementById('testView');
+            const buttons = document.querySelectorAll('.toggle-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            cardView.style.display = 'none';
+            tableView.style.display = 'none';
+            testView.style.display = 'none';
+            
+            if (view === 'card') {
+                cardView.style.display = 'grid';
+                buttons[0].classList.add('active');
+            } else if (view === 'table') {
+                tableView.style.display = 'block';
+                buttons[1].classList.add('active');
+            } else if (view === 'test') {
+                testView.style.display = 'block';
+                buttons[2].classList.add('active');
+                resetTest();
+            }
+        }
+
+        // 테스트 관련 변수
+        let testMode = 'meaning';
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let testQuestions = [];
+        let wrongAnswers = [];
+
+        // 테스트 모드 설정
+        function setTestMode(mode) {
+            testMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            resetTest();
+        }
+
+        // 테스트 초기화
+        function resetTest() {
+            currentQuestionIndex = 0;
+            score = 0;
+            wrongAnswers = [];
+            document.getElementById('currentScore').textContent = '0';
+            document.getElementById('testContent').innerHTML = '<p style="text-align: center; color: #6c757d; font-size: 18px;">테스트를 시작하려면 아래 버튼을 클릭하세요!</p>';
+            document.getElementById('testResults').style.display = 'none';
+            document.getElementById('showResultsBtn').style.display = 'none';
+            document.querySelector('.control-btn').textContent = '테스트 시작';
+            document.querySelector('.control-btn').onclick = startTest;
+        }
+
+        // 테스트 시작
+        function startTest() {
+            // 10개의 랜덤 문제 생성
+            testQuestions = [...words].sort(() => Math.random() - 0.5).slice(0, 10);
+            currentQuestionIndex = 0;
+            score = 0;
+            wrongAnswers = [];
+            
+            document.getElementById('totalQuestions').textContent = testQuestions.length;
+            document.querySelector('.control-btn').textContent = '다음 문제';
+            document.querySelector('.control-btn').onclick = nextQuestion;
+            
+            showQuestion();
+        }
+
+        // 문제 표시
+        function showQuestion() {
+            if (currentQuestionIndex >= testQuestions.length) {
+                showResults();
+                return;
+            }
+
+            const question = testQuestions[currentQuestionIndex];
+            const testContent = document.getElementById('testContent');
+
+            if (testMode === 'meaning') {
+                // 뜻 맞추기
+                const options = generateOptions(question, 'meaning');
+                testContent.innerHTML = `
+                    <div class="question">
+                        <div class="question-text">${question.word}</div>
+                        <div class="question-hint">동의어: ${question.synonyms}</div>
+                    </div>
+                    <div class="answer-options">
+                        ${options.map((opt, idx) => `
+                            <button class="answer-btn" onclick="checkAnswer('${opt.word}', '${question.word}')">${opt.meaning}</button>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (testMode === 'word') {
+                // 단어 맞추기
+                const options = generateOptions(question, 'word');
+                testContent.innerHTML = `
+                    <div class="question">
+                        <div class="question-text">${question.meaning}</div>
+                        <div class="question-hint">반의어: ${question.antonyms}</div>
+                    </div>
+                    <div class="answer-options">
+                        ${options.map((opt, idx) => `
+                            <button class="answer-btn" onclick="checkAnswer('${opt.word}', '${question.word}')">${opt.word}</button>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (testMode === 'blank') {
+                // 빈칸 채우기
+                const blankedExample = question.example.replace(question.word, '<input type="text" class="blank-input" id="blankInput" placeholder="?">');
+                testContent.innerHTML = `
+                    <div class="question">
+                        <div class="question-text">다음 빈칸에 알맞은 단어를 입력하세요:</div>
+                        <div class="fill-blank-question">${blankedExample}</div>
+                        <div class="question-hint">뜻: ${question.meaning}</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="check-answer-btn" onclick="checkBlankAnswer('${question.word}')">정답 확인</button>
+                    </div>
+                `;
+                setTimeout(() => {
+                    document.getElementById('blankInput').focus();
+                }, 100);
+            }
+
+            document.getElementById('currentScore').textContent = score;
+        }
+
+        // 선택지 생성
+        function generateOptions(correctAnswer, type) {
+            const options = [correctAnswer];
+            const otherWords = words.filter(w => w.word !== correctAnswer.word);
+            
+            while (options.length < 4 && otherWords.length > 0) {
+                const randomIndex = Math.floor(Math.random() * otherWords.length);
+                const randomWord = otherWords[randomIndex];
+                if (!options.find(opt => opt.word === randomWord.word)) {
+                    options.push(randomWord);
+                }
+            }
+            
+            return options.sort(() => Math.random() - 0.5);
+        }
+
+        // 답안 확인
+        function checkAnswer(selected, correct) {
+            const buttons = document.querySelectorAll('.answer-btn');
+            buttons.forEach(btn => {
+                btn.classList.add('disabled');
+                btn.onclick = null;
+                
+                if (btn.textContent === words.find(w => w.word === correct).meaning || 
+                    btn.textContent === correct) {
+                    btn.classList.add('correct');
+                } else if (btn.textContent === words.find(w => w.word === selected).meaning || 
+                           btn.textContent === selected) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            if (selected === correct) {
+                score++;
+                document.getElementById('currentScore').textContent = score;
+            } else {
+                wrongAnswers.push({
+                    word: correct,
+                    yourAnswer: selected,
+                    correctMeaning: words.find(w => w.word === correct).meaning
+                });
+            }
+
+            setTimeout(() => {
+                document.querySelector('.control-btn').style.display = 'inline-block';
+            }, 1000);
+        }
+
+        // 빈칸 답안 확인
+        function checkBlankAnswer(correct) {
+            const input = document.getElementById('blankInput');
+            const userAnswer = input.value.trim().toLowerCase();
+            const correctAnswer = correct.toLowerCase();
+
+            if (userAnswer === correctAnswer) {
+                input.style.background = '#d4edda';
+                input.style.borderColor = '#28a745';
+                input.style.color = '#155724';
+                score++;
+                document.getElementById('currentScore').textContent = score;
+            } else {
+                input.style.background = '#f8d7da';
+                input.style.borderColor = '#dc3545';
+                input.style.color = '#721c24';
+                input.value = correct;
+                wrongAnswers.push({
+                    word: correct,
+                    yourAnswer: userAnswer || '(빈칸)',
+                    correctMeaning: words.find(w => w.word === correct).meaning
+                });
+            }
+
+            input.disabled = true;
+            document.querySelector('.check-answer-btn').style.display = 'none';
+            
+            setTimeout(() => {
+                document.querySelector('.control-btn').style.display = 'inline-block';
+            }, 1000);
+        }
+
+        // 다음 문제
+        function nextQuestion() {
+            currentQuestionIndex++;
+            document.querySelector('.control-btn').style.display = 'none';
+            showQuestion();
+        }
+
+        // 결과 표시
+        function showResults() {
+            const percentage = Math.round((score / testQuestions.length) * 100);
+            let message = '';
+            
+            if (percentage === 100) {
+                message = '완벽해요! 모든 단어를 마스터하셨네요! 🎉';
+            } else if (percentage >= 80) {
+                message = '훌륭해요! 거의 다 아시네요! 👏';
+            } else if (percentage >= 60) {
+                message = '좋아요! 조금만 더 복습하면 완벽할 거예요! 💪';
+            } else {
+                message = '화이팅! 복습하면 금방 늘 거예요! 📚';
+            }
+
+            const resultsHTML = `
+                <div class="result-title">테스트 완료!</div>
+                <div class="result-score">${score} / ${testQuestions.length}</div>
+                <div class="result-message">${message}</div>
+                ${wrongAnswers.length > 0 ? `
+                    <div class="wrong-answers">
+                        <h3 style="margin-bottom: 15px; color: #333;">오답 정리</h3>
+                        ${wrongAnswers.map(item => `
+                            <div class="wrong-answer-item">
+                                <div class="wrong-word">${item.word}</div>
+                                <div>정답: <span class="correct-answer">${item.correctMeaning}</span></div>
+                                ${item.yourAnswer !== '(빈칸)' ? `<div style="color: #6c757d;">내 답: ${item.yourAnswer}</div>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+            `;
+
+            document.getElementById('testResults').innerHTML = resultsHTML;
+            document.getElementById('testResults').style.display = 'block';
+            document.getElementById('testContent').style.display = 'none';
+            document.querySelector('.control-btn').textContent = '다시 시작';
+            document.querySelector('.control-btn').onclick = () => {
+                document.getElementById('testContent').style.display = 'block';
+                resetTest();
+            };
+        }
+
+        // 검색 기능
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredWords = words.filter(word => 
+                word.word.toLowerCase().includes(searchTerm) ||
+                word.meaning.includes(searchTerm) ||
+                word.synonyms.toLowerCase().includes(searchTerm) ||
+                word.antonyms.toLowerCase().includes(searchTerm)
+            );
+            
+            renderCards(filteredWords);
+            renderTable(filteredWords);
+        });
+
+        // 초기 렌더링
+        renderCards();
+        renderTable();
+    </script>
+</body>
+</html>
