@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet"><!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -23,13 +23,66 @@
             margin: 0 auto;
         }
 
-        h1 {
+        .header-container {
             text-align: center;
+            padding: 40px 20px 50px;
+            position: relative;
+        }
+
+        .header-title {
+            margin-bottom: 25px;
+        }
+
+        .title-english {
+            display: block;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3.5em;
             color: white;
-            margin-bottom: 30px;
+            letter-spacing: 4px;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+            margin-bottom: 5px;
+        }
+
+        .title-korean {
+            display: block;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 1.2em;
+            font-weight: 300;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 3px;
+        }
+
+        .header-subtitle {
+            margin-top: 30px;
+        }
+
+        .quote-mark {
+            font-family: 'Playfair Display', serif;
             font-size: 2em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            font-weight: 700;
+            color: rgba(255,255,255,0.7);
+            vertical-align: middle;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            color: white;
+            font-style: italic;
+            margin: 0 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .quote-description {
+            margin-top: 10px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.95em;
+            color: rgba(255,255,255,0.85);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            display: none;
         }
 
         .search-box {
@@ -47,11 +100,28 @@
             border-radius: 10px;
             font-size: 16px;
             transition: border-color 0.3s;
+            margin-bottom: 15px;
         }
 
         .search-box input:focus {
             outline: none;
             border-color: #ff6b6b;
+        }
+
+        .word-stats {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .word-stats strong {
+            color: #ff6b6b;
+            font-size: 16px;
         }
 
         .word-grid {
@@ -80,6 +150,41 @@
             width: 100%;
             height: 5px;
             background: linear-gradient(90deg, #ff6b6b, #6c757d);
+        }
+
+        .word-card.memorized {
+            opacity: 0.7;
+            background: #e8f5e9;
+        }
+
+        .word-card.memorized::before {
+            background: linear-gradient(90deg, #28a745, #6c757d);
+        }
+
+        .memorize-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: white;
+            border: 2px solid #ff6b6b;
+            color: #ff6b6b;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .memorize-btn:hover {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .memorize-btn.memorized {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
         }
 
         .word-card:hover {
@@ -273,6 +378,8 @@
             background: #f8f9fa;
             border-radius: 6px;
             font-size: 14px;
+            white-space: nowrap;
+            min-width: 150px;
         }
 
         /* 테이블 내 강조 텍스트 */
@@ -346,10 +453,18 @@
             
             .table-view {
                 overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
             
             table {
-                min-width: 600px;
+                min-width: 800px;
+            }
+            
+            /* 모바일에서 뜻 열 스타일 */
+            td:last-child {
+                white-space: normal;
+                min-width: 120px;
+                word-break: keep-all;
             }
         }
 
@@ -415,12 +530,83 @@
         }
 
         .test-content {
-            background: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             border-radius: 20px;
             padding: 40px;
             min-height: 300px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.07);
             margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .test-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,107,107,0.05) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        .test-welcome {
+            text-align: center;
+            padding: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .test-welcome-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .test-welcome-title {
+            font-size: 24px;
+            color: #333;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .test-welcome-subtitle {
+            font-size: 16px;
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .test-welcome-button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .test-welcome-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
         }
 
         .question {
@@ -618,7 +804,145 @@
             margin-top: 20px;
         }
 
-        .check-answer-btn:hover {
+        .meaning-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        .meaning-input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+        }
+
+        .submit-btn {
+            padding: 12px 30px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .test-pass {
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .test-fail {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* 카드 뒤집기 스타일 */
+        .flip-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 200px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, #ff6b6b, #ff8787);
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .flip-card-back {
+            background: #f8f9fa;
+            color: #333;
+            transform: rotateY(180deg);
+            flex-direction: column;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .flip-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .practice-controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .practice-btn {
+            padding: 10px 25px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0 10px;
+        }
+
+        .practice-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
         }
@@ -626,10 +950,26 @@
 </head>
 <body>
     <div class="container">
-        <h1>📚 제제편입 7월 먼슬리 어휘 정리</h1>
+        <div class="header-container">
+            <div class="header-title">
+                <span class="title-english">JEJE TRANSFER MONTHLY</span>
+                <span class="title-korean">제제편입 월간 어휘</span>
+            </div>
+            <div class="header-subtitle">
+                <span class="quote-mark">"</span>
+                <span class="quote-text">Turn the Page, Transfer Your Life</span>
+                <span class="quote-mark">"</span>
+                <p class="quote-description">책장을 넘기다 보면, 어느새 꿈꾸던 캠퍼스에 있을 당신</p>
+            </div>
+        </div>
         
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="단어를 검색하세요...">
+            <div class="word-stats">
+                <span>전체: <strong id="totalWords">0</strong>개</span>
+                <span>외운 단어: <strong id="memorizedWords">0</strong>개</span>
+                <span>진도율: <strong id="progressRate">0</strong>%</span>
+            </div>
         </div>
         
         <div class="view-toggle">
@@ -667,14 +1007,16 @@
                 <div class="test-header">
                     <h2>📝 단어 테스트</h2>
                     <div class="test-score">
-                        <span id="currentScore">0</span> / <span id="totalQuestions">10</span>
+                        <span id="testInfoText">테스트를 선택하세요</span>
                     </div>
                 </div>
                 
                 <div class="test-mode-selector">
-                    <button class="mode-btn active" onclick="setTestMode('meaning')">뜻 맞추기</button>
-                    <button class="mode-btn" onclick="setTestMode('word')">단어 맞추기</button>
-                    <button class="mode-btn" onclick="setTestMode('blank')">빈칸 채우기</button>
+                    <button class="mode-btn active" onclick="setTestLevel(0)">연습 - 카드 뒤집기</button>
+                    <button class="mode-btn" onclick="setTestLevel(4)">간이 테스트 - 10문제</button>
+                    <button class="mode-btn" onclick="setTestLevel(1)">Level 1 - 전체 (70%)</button>
+                    <button class="mode-btn" onclick="setTestLevel(2)">Level 2 - 핵심 (80%)</button>
+                    <button class="mode-btn" onclick="setTestLevel(3)">Level 3 - 복습 (90%)</button>
                 </div>
                 
                 <div id="testContent" class="test-content">
@@ -694,14 +1036,16 @@
     </div>
 
     <script>
-        // 단어 데이터
+        // 단어 데이터에 중요도와 암기 상태 추가
         const words = [
             {
                 word: "heretical",
                 example: "편붕이는 영어 문법은 절대적 진리가 아니라는 heretical 생각을 품고 자신만의 학습법을 개발했다.",
                 synonyms: "unorthodox, dissenting, iconoclastic",
                 antonyms: "orthodox, conventional",
-                meaning: "이단적인, 이설의"
+                meaning: "이단적인, 이설의",
+                importance: 3,
+                memorized: false
             },
             {
                 word: "derivative",
@@ -1671,6 +2015,45 @@
             }
         ];
 
+        // 초기화: 중요도와 암기 상태 추가
+        function initializeWords() {
+            words.forEach((word, index) => {
+                // 중요도는 1-5 랜덤 (앞쪽 단어일수록 중요도 높음)
+                word.importance = Math.max(1, 5 - Math.floor(index / 30));
+                // 로컬 스토리지에서 암기 상태 불러오기
+                const memorizedWords = JSON.parse(localStorage.getItem('memorizedWords') || '[]');
+                word.memorized = memorizedWords.includes(word.word);
+            });
+            updateWordStats();
+        }
+
+        // 단어 통계 업데이트
+        function updateWordStats() {
+            const total = words.length;
+            const memorized = words.filter(w => w.memorized).length;
+            const progress = Math.round((memorized / total) * 100);
+            
+            document.getElementById('totalWords').textContent = total;
+            document.getElementById('memorizedWords').textContent = memorized;
+            document.getElementById('progressRate').textContent = progress;
+        }
+
+        // 암기 상태 토글
+        function toggleMemorized(wordText) {
+            const word = words.find(w => w.word === wordText);
+            if (word) {
+                word.memorized = !word.memorized;
+                
+                // 로컬 스토리지에 저장
+                const memorizedWords = words.filter(w => w.memorized).map(w => w.word);
+                localStorage.setItem('memorizedWords', JSON.stringify(memorizedWords));
+                
+                updateWordStats();
+                renderCards();
+                renderTable();
+            }
+        }
+
         // 카드 뷰 렌더링
         function renderCards(filteredWords = words) {
             const cardView = document.getElementById('cardView');
@@ -1678,8 +2061,12 @@
             
             filteredWords.forEach(word => {
                 const card = document.createElement('div');
-                card.className = 'word-card';
+                card.className = `word-card ${word.memorized ? 'memorized' : ''}`;
                 card.innerHTML = `
+                    <button class="memorize-btn ${word.memorized ? 'memorized' : ''}" 
+                            onclick="event.stopPropagation(); toggleMemorized('${word.word}')">
+                        ${word.memorized ? '✓ 외웠어요' : '외우기'}
+                    </button>
                     <div class="word-title">${word.word}</div>
                     <div class="word-example">${word.example}</div>
                     <div class="word-relations">
@@ -1743,18 +2130,44 @@
         }
 
         // 테스트 관련 변수
-        let testMode = 'meaning';
+        let testLevel = 0;
         let currentQuestionIndex = 0;
         let score = 0;
         let testQuestions = [];
         let wrongAnswers = [];
+        let failedWords = JSON.parse(localStorage.getItem('failedWords') || '[]');
+        let practiceCards = [];
 
-        // 테스트 모드 설정
-        function setTestMode(mode) {
-            testMode = mode;
+        // 테스트 레벨 설정
+        function setTestLevel(level) {
+            testLevel = level;
             document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
+            
+            // 테스트 정보 업데이트
+            updateTestInfo();
             resetTest();
+        }
+
+        // 테스트 정보 업데이트
+        function updateTestInfo() {
+            const infoText = document.getElementById('testInfoText');
+            
+            if (testLevel === 0) {
+                infoText.innerHTML = '연습 모드: <strong>10</strong>개 카드';
+            } else if (testLevel === 1) {
+                infoText.innerHTML = `전체 테스트: <strong>${words.length}</strong>개 문제`;
+            } else if (testLevel === 2) {
+                const count = Math.floor(words.length * 0.6);
+                infoText.innerHTML = `핵심 테스트: <strong>${count}</strong>개 문제`;
+            } else if (testLevel === 3) {
+                const failedWordsList = words.filter(w => failedWords.includes(w.word));
+                const notMemorized = words.filter(w => !w.memorized);
+                const combined = [...new Set([...failedWordsList, ...notMemorized])];
+                infoText.innerHTML = `복습 테스트: <strong>${combined.length}</strong>개 문제`;
+            } else if (testLevel === 4) {
+                infoText.innerHTML = '간이 테스트: <strong>10</strong>개 문제';
+            }
         }
 
         // 테스트 초기화
@@ -1762,194 +2175,351 @@
             currentQuestionIndex = 0;
             score = 0;
             wrongAnswers = [];
-            document.getElementById('currentScore').textContent = '0';
-            document.getElementById('testContent').innerHTML = '<p style="text-align: center; color: #6c757d; font-size: 18px;">테스트를 시작하려면 아래 버튼을 클릭하세요!</p>';
+            
+            let levelText = '';
+            let levelIcon = '';
+            let levelDescription = '';
+            
+            if (testLevel === 0) {
+                levelText = '카드 뒤집기 연습';
+                levelIcon = '🎴';
+                levelDescription = '10개의 단어를 카드 뒤집기로 연습해보세요!<br>카드를 클릭하면 뜻을 확인할 수 있습니다.';
+            } else if (testLevel === 1) {
+                levelText = 'Level 1 - 전체 단어 테스트';
+                levelIcon = '📚';
+                levelDescription = `총 ${words.length}개의 모든 단어를 테스트합니다.<br>통과 기준: <strong>70% 이상</strong>`;
+            } else if (testLevel === 2) {
+                const count = Math.floor(words.length * 0.6);
+                levelText = 'Level 2 - 핵심 단어 테스트';
+                levelIcon = '🎯';
+                levelDescription = `중요도가 높은 상위 ${count}개 단어를 테스트합니다.<br>통과 기준: <strong>80% 이상</strong>`;
+            } else if (testLevel === 3) {
+                levelText = 'Level 3 - 복습 테스트';
+                levelIcon = '🔥';
+                levelDescription = '틀렸거나 외우지 못한 단어들을 집중 복습합니다.<br>통과 기준: <strong>90% 이상</strong>';
+            } else if (testLevel === 4) {
+                levelText = '간이 테스트';
+                levelIcon = '⚡';
+                levelDescription = '랜덤 10개 단어로 빠르게 실력을 체크해보세요!<br>부담 없이 도전하세요!';
+            }
+            
+            document.getElementById('testContent').innerHTML = `
+                <div class="test-welcome">
+                    <div class="test-welcome-icon">${levelIcon}</div>
+                    <h3 class="test-welcome-title">${levelText}</h3>
+                    <p class="test-welcome-subtitle">${levelDescription}</p>
+                    <button class="test-welcome-button" onclick="startTest()">
+                        ${testLevel === 0 ? 'Start Practice' : 'Start Test'}
+                    </button>
+                </div>`;
             document.getElementById('testResults').style.display = 'none';
             document.getElementById('showResultsBtn').style.display = 'none';
-            document.querySelector('.control-btn').textContent = '테스트 시작';
-            document.querySelector('.control-btn').onclick = startTest;
+            document.querySelector('.control-btn').style.display = 'none';
         }
 
         // 테스트 시작
         function startTest() {
-            // 10개의 랜덤 문제 생성
-            testQuestions = [...words].sort(() => Math.random() - 0.5).slice(0, 10);
+            if (testLevel === 0) {
+                // 연습 모드: 카드 뒤집기
+                startPracticeMode();
+                return;
+            }
+            
+            // 레벨별 문제 생성
+            if (testLevel === 1) {
+                // Level 1: 전체 단어
+                testQuestions = [...words].sort(() => Math.random() - 0.5);
+            } else if (testLevel === 2) {
+                // Level 2: 중요도 높은 상위 60%
+                const sortedByImportance = [...words].sort((a, b) => b.importance - a.importance);
+                const topCount = Math.floor(words.length * 0.6);
+                testQuestions = sortedByImportance.slice(0, topCount).sort(() => Math.random() - 0.5);
+            } else if (testLevel === 3) {
+                // Level 3: 틀린 단어 + 외우지 않은 단어
+                const failedWordsList = words.filter(w => failedWords.includes(w.word));
+                const notMemorized = words.filter(w => !w.memorized);
+                const combined = [...new Set([...failedWordsList, ...notMemorized])];
+                testQuestions = combined.sort(() => Math.random() - 0.5);
+                
+                if (testQuestions.length === 0) {
+                    alert('복습할 단어가 없습니다! 모든 단어를 외우셨네요! 🎉');
+                    resetTest();
+                    return;
+                }
+            } else if (testLevel === 4) {
+                // 간이 테스트: 랜덤 10문제
+                testQuestions = [...words].sort(() => Math.random() - 0.5).slice(0, 10);
+            }
+            
             currentQuestionIndex = 0;
             score = 0;
             wrongAnswers = [];
             
-            document.getElementById('totalQuestions').textContent = testQuestions.length;
-            document.querySelector('.control-btn').textContent = '다음 문제';
-            document.querySelector('.control-btn').onclick = nextQuestion;
+            document.querySelector('.control-btn').style.display = 'none';
             
             showQuestion();
         }
 
+        // 연습 모드 시작
+        function startPracticeMode() {
+            practiceCards = [...words].sort(() => Math.random() - 0.5).slice(0, 10);
+            const testContent = document.getElementById('testContent');
+            
+            testContent.innerHTML = `
+                <div class="flip-cards-container">
+                    ${practiceCards.map((card, index) => `
+                        <div class="flip-card" onclick="flipCard(${index})">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    ${card.word}
+                                    <div class="flip-hint">클릭하세요</div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <strong>${card.meaning}</strong>
+                                    <br><br>
+                                    <small>동의어: ${card.synonyms}</small>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="practice-controls">
+                    <button class="practice-btn" onclick="shufflePracticeCards()">다른 단어로</button>
+                    <button class="practice-btn" onclick="flipAllCards()">모두 뒤집기</button>
+                    <button class="practice-btn" onclick="resetAllCards()">모두 원래대로</button>
+                </div>
+            `;
+            
+            document.querySelector('.control-btn').style.display = 'none';
+            document.getElementById('testInfoText').textContent = '연습 모드 진행 중';
+        }
+
+        // 카드 뒤집기
+        function flipCard(index) {
+            const card = document.querySelectorAll('.flip-card')[index];
+            card.classList.toggle('flipped');
+            
+            // 1.5초 후 자동으로 다시 뒤집기
+            if (card.classList.contains('flipped')) {
+                setTimeout(() => {
+                    card.classList.remove('flipped');
+                }, 1500);
+            }
+        }
+
+        // 모든 카드 뒤집기
+        function flipAllCards() {
+            document.querySelectorAll('.flip-card').forEach(card => {
+                card.classList.add('flipped');
+            });
+        }
+
+        // 모든 카드 원래대로
+        function resetAllCards() {
+            document.querySelectorAll('.flip-card').forEach(card => {
+                card.classList.remove('flipped');
+            });
+        }
+
+        // 연습 카드 섞기
+        function shufflePracticeCards() {
+            startPracticeMode();
+        }
+
         // 문제 표시
         function showQuestion() {
-            if (currentQuestionIndex >= testQuestions.length) {
+            if (!testQuestions || currentQuestionIndex >= testQuestions.length) {
                 showResults();
                 return;
             }
 
+            // 진행 상황 업데이트
+            const infoText = document.getElementById('testInfoText');
+            infoText.innerHTML = `진행 중: <strong>${currentQuestionIndex + 1}</strong> / <strong>${testQuestions.length}</strong> (현재 점수: ${score})`;
+
             const question = testQuestions[currentQuestionIndex];
             const testContent = document.getElementById('testContent');
 
-            if (testMode === 'meaning') {
-                // 뜻 맞추기
+            if (testLevel === 3) {
+                // Level 3: 객관식
                 const options = generateOptions(question, 'meaning');
                 testContent.innerHTML = `
                     <div class="question">
                         <div class="question-text">${question.word}</div>
-                        <div class="question-hint">동의어: ${question.synonyms}</div>
+                        <div class="question-hint">예문: ${question.example}</div>
                     </div>
                     <div class="answer-options">
                         ${options.map((opt, idx) => `
-                            <button class="answer-btn" onclick="checkAnswer('${opt.word}', '${question.word}')">${opt.meaning}</button>
+                            <button class="answer-btn" onclick="checkMultipleChoice('${opt.word.replace(/'/g, "\\'")}', '${question.word.replace(/'/g, "\\'")}')">${opt.meaning}</button>
                         `).join('')}
                     </div>
                 `;
-            } else if (testMode === 'word') {
-                // 단어 맞추기
-                const options = generateOptions(question, 'word');
+            } else if (testLevel === 1 || testLevel === 2 || testLevel === 4) {
+                // Level 1, 2, 4: 주관식
                 testContent.innerHTML = `
                     <div class="question">
-                        <div class="question-text">${question.meaning}</div>
-                        <div class="question-hint">반의어: ${question.antonyms}</div>
+                        <div class="question-text">${question.word}</div>
+                        <div class="question-hint">예문: ${question.example}</div>
                     </div>
-                    <div class="answer-options">
-                        ${options.map((opt, idx) => `
-                            <button class="answer-btn" onclick="checkAnswer('${opt.word}', '${question.word}')">${opt.word}</button>
-                        `).join('')}
-                    </div>
-                `;
-            } else if (testMode === 'blank') {
-                // 빈칸 채우기
-                const blankedExample = question.example.replace(question.word, '<input type="text" class="blank-input" id="blankInput" placeholder="?">');
-                testContent.innerHTML = `
-                    <div class="question">
-                        <div class="question-text">다음 빈칸에 알맞은 단어를 입력하세요:</div>
-                        <div class="fill-blank-question">${blankedExample}</div>
-                        <div class="question-hint">뜻: ${question.meaning}</div>
-                    </div>
+                    <input type="text" class="meaning-input" id="meaningInput" 
+                           placeholder="뜻을 입력하세요 (품사 포함)" 
+                           onkeypress="if(event.key==='Enter') submitAnswer()">
                     <div style="text-align: center;">
-                        <button class="check-answer-btn" onclick="checkBlankAnswer('${question.word}')">정답 확인</button>
+                        <button class="submit-btn" onclick="submitAnswer()">제출</button>
                     </div>
                 `;
                 setTimeout(() => {
-                    document.getElementById('blankInput').focus();
+                    const input = document.getElementById('meaningInput');
+                    if (input) input.focus();
                 }, 100);
             }
-
-            document.getElementById('currentScore').textContent = score;
         }
 
-        // 선택지 생성
-        function generateOptions(correctAnswer, type) {
-            const options = [correctAnswer];
-            const otherWords = words.filter(w => w.word !== correctAnswer.word);
+        // 주관식 답안 제출
+        function submitAnswer() {
+            const userAnswer = document.getElementById('meaningInput').value.trim().toLowerCase();
+            const correctAnswer = testQuestions[currentQuestionIndex].meaning.toLowerCase();
             
-            while (options.length < 4 && otherWords.length > 0) {
-                const randomIndex = Math.floor(Math.random() * otherWords.length);
-                const randomWord = otherWords[randomIndex];
-                if (!options.find(opt => opt.word === randomWord.word)) {
-                    options.push(randomWord);
+            // 답안 비교 (유연한 채점)
+            const isCorrect = checkAnswerSimilarity(userAnswer, correctAnswer);
+            
+            if (isCorrect) {
+                score++;
+            } else {
+                wrongAnswers.push({
+                    word: testQuestions[currentQuestionIndex].word,
+                    yourAnswer: userAnswer || '(미입력)',
+                    correctMeaning: testQuestions[currentQuestionIndex].meaning
+                });
+                
+                // 틀린 단어 저장
+                if (!failedWords.includes(testQuestions[currentQuestionIndex].word)) {
+                    failedWords.push(testQuestions[currentQuestionIndex].word);
+                    localStorage.setItem('failedWords', JSON.stringify(failedWords));
                 }
             }
             
-            return options.sort(() => Math.random() - 0.5);
+            currentQuestionIndex++;
+            showQuestion();
         }
 
-        // 답안 확인
-        function checkAnswer(selected, correct) {
+        // 답안 유사도 체크 (품사와 핵심 의미 확인)
+        function checkAnswerSimilarity(userAnswer, correctAnswer) {
+            // 품사 체크
+            const posParts = ['적인', '하다', '되다', '의', '인', '한', '된'];
+            let hasCorrectPOS = false;
+            
+            for (let pos of posParts) {
+                if (correctAnswer.includes(pos) && userAnswer.includes(pos)) {
+                    hasCorrectPOS = true;
+                    break;
+                }
+            }
+            
+            // 핵심 단어 추출
+            const correctKeywords = extractKeywords(correctAnswer);
+            const userKeywords = extractKeywords(userAnswer);
+            
+            // 일치하는 키워드 수 계산
+            let matchCount = 0;
+            for (let keyword of userKeywords) {
+                if (correctKeywords.some(ck => ck.includes(keyword) || keyword.includes(ck))) {
+                    matchCount++;
+                }
+            }
+            
+            // 60% 이상 일치하거나 품사가 맞으면 정답
+            return matchCount >= correctKeywords.length * 0.6 || (hasCorrectPOS && matchCount > 0);
+        }
+
+        // 키워드 추출
+        function extractKeywords(text) {
+            // 조사, 띄어쓰기 등 제거하고 핵심 단어만 추출
+            return text.replace(/[,;()]/g, ' ')
+                      .split(/\s+/)
+                      .filter(word => word.length > 1)
+                      .filter(word => !['의', '을', '를', '이', '가', '은', '는', '와', '과'].includes(word));
+        }
+
+        // 객관식 답안 확인
+        function checkMultipleChoice(selected, correct) {
             const buttons = document.querySelectorAll('.answer-btn');
+            const correctWord = words.find(w => w.word === correct);
+            const selectedWord = words.find(w => w.word === selected);
+            
             buttons.forEach(btn => {
                 btn.classList.add('disabled');
                 btn.onclick = null;
                 
-                if (btn.textContent === words.find(w => w.word === correct).meaning || 
-                    btn.textContent === correct) {
+                if (btn.textContent === correctWord.meaning) {
                     btn.classList.add('correct');
-                } else if (btn.textContent === words.find(w => w.word === selected).meaning || 
-                           btn.textContent === selected) {
+                } else if (selectedWord && btn.textContent === selectedWord.meaning) {
                     btn.classList.add('incorrect');
                 }
             });
 
             if (selected === correct) {
                 score++;
-                document.getElementById('currentScore').textContent = score;
             } else {
                 wrongAnswers.push({
                     word: correct,
-                    yourAnswer: selected,
-                    correctMeaning: words.find(w => w.word === correct).meaning
+                    yourAnswer: selectedWord ? selectedWord.meaning : '(선택 오류)',
+                    correctMeaning: correctWord.meaning
                 });
+                
+                // 틀린 단어 저장
+                if (!failedWords.includes(correct)) {
+                    failedWords.push(correct);
+                    localStorage.setItem('failedWords', JSON.stringify(failedWords));
+                }
             }
 
             setTimeout(() => {
-                document.querySelector('.control-btn').style.display = 'inline-block';
-            }, 1000);
-        }
-
-        // 빈칸 답안 확인
-        function checkBlankAnswer(correct) {
-            const input = document.getElementById('blankInput');
-            const userAnswer = input.value.trim().toLowerCase();
-            const correctAnswer = correct.toLowerCase();
-
-            if (userAnswer === correctAnswer) {
-                input.style.background = '#d4edda';
-                input.style.borderColor = '#28a745';
-                input.style.color = '#155724';
-                score++;
-                document.getElementById('currentScore').textContent = score;
-            } else {
-                input.style.background = '#f8d7da';
-                input.style.borderColor = '#dc3545';
-                input.style.color = '#721c24';
-                input.value = correct;
-                wrongAnswers.push({
-                    word: correct,
-                    yourAnswer: userAnswer || '(빈칸)',
-                    correctMeaning: words.find(w => w.word === correct).meaning
-                });
-            }
-
-            input.disabled = true;
-            document.querySelector('.check-answer-btn').style.display = 'none';
-            
-            setTimeout(() => {
-                document.querySelector('.control-btn').style.display = 'inline-block';
-            }, 1000);
-        }
-
-        // 다음 문제
-        function nextQuestion() {
-            currentQuestionIndex++;
-            document.querySelector('.control-btn').style.display = 'none';
-            showQuestion();
+                currentQuestionIndex++;
+                showQuestion();
+            }, 1500);
         }
 
         // 결과 표시
         function showResults() {
-            const percentage = Math.round((score / testQuestions.length) * 100);
-            let message = '';
-            
-            if (percentage === 100) {
-                message = '완벽해요! 모든 단어를 마스터하셨네요! 🎉';
-            } else if (percentage >= 80) {
-                message = '훌륭해요! 거의 다 아시네요! 👏';
-            } else if (percentage >= 60) {
-                message = '좋아요! 조금만 더 복습하면 완벽할 거예요! 💪';
-            } else {
-                message = '화이팅! 복습하면 금방 늘 거예요! 📚';
+            if (!testQuestions || testQuestions.length === 0) {
+                resetTest();
+                return;
             }
-
+            
+            const percentage = Math.round((score / testQuestions.length) * 100);
+            let passingScore = 70;
+            if (testLevel === 2) passingScore = 80;
+            else if (testLevel === 3) passingScore = 90;
+            else if (testLevel === 4) passingScore = 0; // 간이 테스트는 통과 기준 없음
+            
+            const passed = testLevel === 4 ? true : percentage >= passingScore;
+            
+            let passFailMessage = '';
+            if (testLevel === 4) {
+                // 간이 테스트는 점수만 표시
+                if (percentage >= 90) {
+                    passFailMessage = `<div class="test-pass">🎉 훌륭해요! ${percentage}% 정답률!</div>`;
+                } else if (percentage >= 70) {
+                    passFailMessage = `<div class="test-pass">👏 좋아요! ${percentage}% 정답률!</div>`;
+                } else {
+                    passFailMessage = `<div class="test-fail">💪 더 노력해보세요! ${percentage}% 정답률</div>`;
+                }
+            } else if (passed) {
+                passFailMessage = `<div class="test-pass">🎉 축하합니다! Level ${testLevel} 통과!</div>`;
+                // 통과한 단어들은 틀린 단어 목록에서 제거
+                if (testLevel === 3) {
+                    failedWords = failedWords.filter(w => wrongAnswers.some(wa => wa.word === w));
+                    localStorage.setItem('failedWords', JSON.stringify(failedWords));
+                }
+            } else {
+                passFailMessage = `<div class="test-fail">😢 아쉽네요. Level ${testLevel} 미통과 (${passingScore}% 필요)</div>`;
+            }
+            
             const resultsHTML = `
+                ${passFailMessage}
                 <div class="result-title">테스트 완료!</div>
-                <div class="result-score">${score} / ${testQuestions.length}</div>
-                <div class="result-message">${message}</div>
+                <div class="result-score">${score} / ${testQuestions.length} (${percentage}%)</div>
                 ${wrongAnswers.length > 0 ? `
                     <div class="wrong-answers">
                         <h3 style="margin-bottom: 15px; color: #333;">오답 정리</h3>
@@ -1957,16 +2527,17 @@
                             <div class="wrong-answer-item">
                                 <div class="wrong-word">${item.word}</div>
                                 <div>정답: <span class="correct-answer">${item.correctMeaning}</span></div>
-                                ${item.yourAnswer !== '(빈칸)' ? `<div style="color: #6c757d;">내 답: ${item.yourAnswer}</div>` : ''}
+                                <div style="color: #6c757d;">내 답: ${item.yourAnswer}</div>
                             </div>
                         `).join('')}
                     </div>
-                ` : ''}
+                ` : '<div class="result-message">모든 문제를 맞추셨습니다! 완벽해요! 🎉</div>'}
             `;
 
             document.getElementById('testResults').innerHTML = resultsHTML;
             document.getElementById('testResults').style.display = 'block';
             document.getElementById('testContent').style.display = 'none';
+            document.querySelector('.control-btn').style.display = 'inline-block';
             document.querySelector('.control-btn').textContent = '다시 시작';
             document.querySelector('.control-btn').onclick = () => {
                 document.getElementById('testContent').style.display = 'block';
@@ -1989,6 +2560,7 @@
         });
 
         // 초기 렌더링
+        initializeWords();
         renderCards();
         renderTable();
     </script>
