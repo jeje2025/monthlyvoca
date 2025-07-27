@@ -1328,11 +1328,19 @@
         </div>
         
         <div class="view-toggle">
-            <button class="toggle-btn active" onclick="showView('materials')">학습 자료 📚</button>
-            <button class="toggle-btn" onclick="showView('card')">카드 어휘</button>
-            <button class="toggle-btn" onclick="showView('table')">어휘 테이블</button>
-            <button class="toggle-btn" onclick="showView('test')">어휘 테스트 📝</button>
-        </div>
+    <button class="toggle-btn active" onclick="showView(event, 'materials')">학습 자료 📚</button>
+    <button class="toggle-btn" onclick="showView(event, 'card')">카드 어휘</button>
+    <button class="toggle-btn" onclick="showView(event, 'table')">어휘 테이블</button>
+    <button class="toggle-btn" onclick="showView(event, 'test')">어휘 테스트 📝</button>
+</div>
+
+<div class="test-mode-selector">
+    <button class="mode-btn active" onclick="setTestLevel(event, 0)">연습 - 카드 뒤집기</button>
+    <button class="mode-btn" onclick="setTestLevel(event, 4)">간이 테스트 - 10문제</button>
+    <button class="mode-btn" onclick="setTestLevel(event, 1)">Level 1 - 전체 (70%)</button>
+    <button class="mode-btn" onclick="setTestLevel(event, 2)">Level 2 - 핵심 (80%)</button>
+    <button class="mode-btn" onclick="setTestLevel(event, 3)">Level 3 - 복습 (90%)</button>
+</div>
         
         <!-- 카드 뷰 -->
         <div id="cardView" class="word-grid" style="display: none;">
@@ -2538,35 +2546,42 @@
         }
 
         // 뷰 전환
-        function showView(view) {
-            const cardView = document.getElementById('cardView');
-            const tableView = document.getElementById('tableView');
-            const testView = document.getElementById('testView');
-            const materialsView = document.getElementById('materialsView');
-            const buttons = document.querySelectorAll('.toggle-btn');
-            
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            cardView.style.display = 'none';
-            tableView.style.display = 'none';
-            testView.style.display = 'none';
-            materialsView.style.display = 'none';
-            
-            if (view === 'materials') {
-                materialsView.style.display = 'block';
-                buttons[0].classList.add('active');
-            } else if (view === 'card') {
-                cardView.style.display = 'grid';
-                buttons[1].classList.add('active');
-            } else if (view === 'table') {
-                tableView.style.display = 'block';
-                buttons[2].classList.add('active');
-            } else if (view === 'test') {
-                testView.style.display = 'block';
-                buttons[3].classList.add('active');
-                resetTest();
-            }
-        }
+        function showView(event, view) {
+    const cardView = document.getElementById('cardView');
+    const tableView = document.getElementById('tableView');
+    const testView = document.getElementById('testView');
+    const materialsView = document.getElementById('materialsView');
+    const buttons = document.querySelectorAll('.toggle-btn');
+
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active'); // 클릭된 버튼을 활성화
+
+    cardView.style.display = 'none';
+    tableView.style.display = 'none';
+    testView.style.display = 'none';
+    materialsView.style.display = 'none';
+
+    if (view === 'materials') {
+        materialsView.style.display = 'block';
+    } else if (view === 'card') {
+        cardView.style.display = 'grid';
+    } else if (view === 'table') {
+        tableView.style.display = 'block';
+    } else if (view === 'test') {
+        testView.style.display = 'block';
+        resetTest();
+    }
+}
+
+// 기존 setTestLevel 함수를 지우고 아래 코드로 교체하세요.
+function setTestLevel(event, level) {
+    testLevel = level;
+    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    updateTestInfo();
+    resetTest();
+}
 
         // 테스트 관련 변수
         let testLevel = 0;
