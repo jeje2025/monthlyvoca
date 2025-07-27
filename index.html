@@ -1376,12 +1376,12 @@
                 </div>
                 
                 <div class="test-mode-selector">
-                    <button class="mode-btn active" onclick="setTestLevel(0)">연습 - 카드 뒤집기</button>
-                    <button class="mode-btn" onclick="setTestLevel(4)">간이 테스트 - 10문제</button>
-                    <button class="mode-btn" onclick="setTestLevel(1)">Level 1 - 전체 (70%)</button>
-                    <button class="mode-btn" onclick="setTestLevel(2)">Level 2 - 핵심 (80%)</button>
-                    <button class="mode-btn" onclick="setTestLevel(3)">Level 3 - 복습 (90%)</button>
-                </div>
+    <button class="mode-btn active" onclick="setTestLevel(event, 0)">연습 - 카드 뒤집기</button>
+    <button class="mode-btn" onclick="setTestLevel(event, 4)">간이 테스트 - 10문제</button>
+    <button class="mode-btn" onclick="setTestLevel(event, 1)">Level 1 - 전체 (70%)</button>
+    <button class="mode-btn" onclick="setTestLevel(event, 2)">Level 2 - 핵심 (80%)</button>
+    <button class="mode-btn" onclick="setTestLevel(event, 3)">Level 3 - 복습 (90%)</button>
+</div>
                 
                 <div id="testContent" class="test-content">
                     <!-- 테스트 문제가 여기에 표시됩니다 -->
