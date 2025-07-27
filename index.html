@@ -1325,24 +1325,23 @@
             </div>
         </div>
         
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="단어를 검색하세요...">
-            <div class="word-stats">
-                <span>전체: <strong id="totalWords">0</strong>개</span>
-                <span>외운 단어: <strong id="memorizedWords">0</strong>개</span>
-                <span>진도율: <strong id="progressRate">0</strong>%</span>
-            </div>
-        </div>
-        
         <div class="view-toggle">
-            <button class="toggle-btn active" onclick="showView('card')">카드 어휘</button>
+            <button class="toggle-btn active" onclick="showView('materials')">학습 자료 📚</button>
+            <button class="toggle-btn" onclick="showView('card')">카드 어휘</button>
             <button class="toggle-btn" onclick="showView('table')">어휘 테이블</button>
             <button class="toggle-btn" onclick="showView('test')">어휘 테스트 📝</button>
-            <button class="toggle-btn" onclick="showView('materials')">학습 자료 📚</button>
         </div>
         
         <!-- 카드 뷰 -->
-        <div id="cardView" class="word-grid">
+        <div id="cardView" class="word-grid" style="display: none;">
+            <div class="search-box" style="grid-column: 1 / -1; margin-bottom: 20px;">
+                <input type="text" id="searchInput" placeholder="단어를 검색하세요...">
+                <div class="word-stats">
+                    <span>전체: <strong id="totalWords">0</strong>개</span>
+                    <span>외운 단어: <strong id="memorizedWords">0</strong>개</span>
+                    <span>진도율: <strong id="progressRate">0</strong>%</span>
+                </div>
+            </div>
             <!-- 카드들이 여기에 동적으로 추가됩니다 -->
         </div>
         
@@ -1398,7 +1397,7 @@
         </div>
         
         <!-- 학습 자료 뷰 -->
-        <div id="materialsView" style="display: none;">
+        <div id="materialsView" style="display: block;">
             <div class="materials-container">
                 <div class="materials-header">
                     <h2>📚 학습 자료</h2>
@@ -2472,7 +2471,9 @@
         // 카드 뷰 렌더링
         function renderCards(filteredWords = words) {
             const cardView = document.getElementById('cardView');
-            cardView.innerHTML = '';
+            // 검색 박스를 제외한 카드만 제거
+            const existingCards = cardView.querySelectorAll('.word-card');
+            existingCards.forEach(card => card.remove());
             
             filteredWords.forEach(word => {
                 const card = document.createElement('div');
@@ -2520,16 +2521,13 @@
 
         // PDF 다운로드 함수
         function downloadTestPaper() {
-            // 여기에 실제 PDF의 Base64 데이터를 넣어야 합니다
-            // const base64PDF = "JVBERi0xLjQKJcOkw7zDtsOfCj..."; // 실제 PDF base64 데이터
-            
-            // 현재는 Notion 링크로 이동
-            window.open('https://jejetransfer.notion.site/jejemonthly7?source=copy_link', '_blank');
+            // GitHub Issues 링크로 이동
+            window.open('https://github.com/jeje2025/forjejetransfer/issues/1#issuecomment-3124132690', '_blank');
         }
         
         function downloadAnswerSheet() {
-            // Google Drive 링크로 이동
-            window.open('https://drive.google.com/file/d/14Y6UyGbgg_c0L2HF3GbQtTId9MZx3Yae/view', '_blank');
+            // GitHub Issues 링크로 이동
+            window.open('https://github.com/jeje2025/forjejetransfer/issues/1#issuecomment-3124132765', '_blank');
         }
 
         // 뷰 전환
@@ -2547,19 +2545,19 @@
             testView.style.display = 'none';
             materialsView.style.display = 'none';
             
-            if (view === 'card') {
-                cardView.style.display = 'grid';
+            if (view === 'materials') {
+                materialsView.style.display = 'block';
                 buttons[0].classList.add('active');
+            } else if (view === 'card') {
+                cardView.style.display = 'grid';
+                buttons[1].classList.add('active');
             } else if (view === 'table') {
                 tableView.style.display = 'block';
-                buttons[1].classList.add('active');
+                buttons[2].classList.add('active');
             } else if (view === 'test') {
                 testView.style.display = 'block';
-                buttons[2].classList.add('active');
-                resetTest();
-            } else if (view === 'materials') {
-                materialsView.style.display = 'block';
                 buttons[3].classList.add('active');
+                resetTest();
             }
         }
 
