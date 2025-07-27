@@ -3058,76 +3058,77 @@
 
         // 결과 표시
         function showResults() {
-            if (!testQuestions || testQuestions.length === 0) {
-                resetTest();
-                return;
-            }
-            
-            const percentage = Math.round((score / testQuestions.length) * 100);
-            let passingScore = 70;
-            if (testLevel === 2) passingScore = 80;
-            else if (testLevel === 3) passingScore = 90;
-            else if (testLevel === 4) passingScore = 0; // 간이 테스트는 통과 기준 없음
-            
-            const passed = testLevel === 4 ? true : percentage >= passingScore;
-            
-            let passFailMessage = '';
-            if (testLevel === 4) {
-                // 간이 테스트는 점수만 표시
-                if (percentage >= 90) {
-                    passFailMessage = `<div class="test-pass">🎉 훌륭해요! ${percentage}% 정답률!</div>`;
-                } else if (percentage >= 70) {
-                    passFailMessage = `<div class="test-pass">👏 좋아요! ${percentage}% 정답률!</div>`;
-                } else {
-                    passFailMessage = `<div class="test-fail">💪 더 노력해보세요! ${percentage}% 정답률</div>`;
-                }
-            } else if (passed) {
-                passFailMessage = `<div class="test-pass">🎉 축하합니다! Level ${testLevel} 통과!</div>`;
-                // 통과한 단어들은 틀린 단어 목록에서 제거
-                if (testLevel === 3) {
-                    failedWords = failedWords.filter(w => wrongAnswers.some(wa => wa.word === w));
-                    try {
-                        localStorage.setItem('failedWords', JSON.stringify(failedWords));
-                    } catch (e) {
-                        console.log('localStorage 저장 실패');
-                    }
-                }
-            } else {
-                passFailMessage = `<div class="test-fail">😢 아쉽네요. Level ${testLevel} 미통과 (${passingScore}% 필요)</div>`;
-            }
-            
-            const resultsHTML = `
-                ${passFailMessage}
-                <div class="result-title">테스트 완료!</div>
-                <div class="result-score">${score} / ${testQuestions.length} (${percentage}%)</div>
-                ${wrongAnswers.length > 0 ? `
-                    <div class="wrong-answers">
-                        <h3 style="margin-bottom: 15px; color: #333;">틀린 단어 정리</h3>
-                        ${wrongAnswers.map(item => {
-                            const word = words.find(w => w.word === item.word);
-                            return `
-                            <div class="wrong-answer-item">
-                                <div class="wrong-word">${item.word}</div>
-                                <div>정답: <span class="correct-answer">${item.correctMeaning}</span></div>
-                                <div style="color: #6c757d;">내 답: ${item.yourAnswer}</div>
-                                ${word ? `<div style="color: #888; font-size: 14px; margin-top: 5px;">예문: ${word.example}</div>` : ''}
-                            </div>
-                        `;
-                        }).join('')}
-                    </div>
-                ` : '<div class="result-message">모든 문제를 맞추셨습니다! 완벽해요! 🎉</div>'}
-            `;
+    if (!testQuestions || testQuestions.length === 0) {
+        resetTest();
+        return;
+    }
 
-            document.getElementById('testResults').innerHTML = resultsHTML;
-            document.getElementById('testResults').style.display = 'block';
-            document.getElementById('testContent').style.display = 'none';
-            document.querySelector('.control-btn').style.display = 'inline-block';
-            document.querySelector('.control-btn').textContent = '다시 시작';
-            document.querySelector('.control-btn').onclick = () => {
-                document.getElementById('testContent').style.display = 'block';
-                resetTest();
-            };
+    const percentage = Math.round((score / testQuestions.length) * 100);
+    let passingScore = 70;
+    if (testLevel === 2) passingScore = 80;
+    else if (testLevel === 3) passingScore = 90;
+    else if (testLevel === 4) passingScore = 0;
+
+    const passed = testLevel === 4 ? true : percentage >= passingScore;
+
+    let passFailMessage = '';
+    if (testLevel === 4) {
+        if (percentage >= 90) {
+            passFailMessage = `<div class="test-pass">🎉 훌륭해요! ${percentage}% 정답률!</div>`;
+        } else if (percentage >= 70) {
+            passFailMessage = `<div class="test-pass">👏 좋아요! ${percentage}% 정답률!</div>`;
+        } else {
+            passFailMessage = `<div class="test-fail">💪 더 노력해보세요! ${percentage}% 정답률</div>`;
         }
+    } else if (passed) {
+        passFailMessage = `<div class="test-pass">🎉 축하합니다! Level ${testLevel} 통과!</div>`;
+
+        // [오류 수정] 레벨 3 통과 시, 이번 테스트에 나왔던 단어들을 failedWords 목록에서 제거합니다.
+        if (testLevel === 3) {
+            const wordsInThisTest = testQuestions.map(q => q.word);
+            failedWords = failedWords.filter(fw => !wordsInThisTest.includes(fw));
+            try {
+                localStorage.setItem('failedWords', JSON.stringify(failedWords));
+            } catch (e) {
+                console.log('localStorage 저장 실패');
+            }
+        }
+    } else {
+        passFailMessage = `<div class="test-fail">😢 아쉽네요. Level ${testLevel} 미통과 (${passingScore}% 필요)</div>`;
+    }
+
+    const resultsHTML = `
+        ${passFailMessage}
+        <div class="result-title">테스트 완료!</div>
+        <div class="result-score">${score} / ${testQuestions.length} (${percentage}%)</div>
+        ${wrongAnswers.length > 0 ? `
+            <div class="wrong-answers">
+                <h3 style="margin-bottom: 15px; color: #333;">틀린 단어 정리</h3>
+                ${wrongAnswers.map(item => {
+                    const word = words.find(w => w.word === item.word);
+                    return `
+                    <div class="wrong-answer-item">
+                        <div class="wrong-word">${item.word}</div>
+                        <div>정답: <span class="correct-answer">${item.correctMeaning}</span></div>
+                        <div style="color: #6c757d;">내 답: ${item.yourAnswer}</div>
+                        ${word ? `<div style="color: #888; font-size: 14px; margin-top: 5px;">예문: ${word.example}</div>` : ''}
+                    </div>
+                `;
+                }).join('')}
+            </div>
+        ` : '<div class="result-message">모든 문제를 맞추셨습니다! 완벽해요! 🎉</div>'}
+    `;
+
+    document.getElementById('testResults').innerHTML = resultsHTML;
+    document.getElementById('testResults').style.display = 'block';
+    document.getElementById('testContent').style.display = 'none';
+    document.querySelector('.control-btn').style.display = 'inline-block';
+    document.querySelector('.control-btn').textContent = '다시 시작';
+    document.querySelector('.control-btn').onclick = () => {
+        document.getElementById('testContent').style.display = 'block';
+        resetTest();
+    };
+}
 
         // 검색 기능
         document.getElementById('searchInput').addEventListener('input', function(e) {
