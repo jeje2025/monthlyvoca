@@ -669,12 +669,27 @@
             font-size: 16px;
             color: #333;
             text-align: center;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
 
         .answer-btn:hover {
             border-color: #ff6b6b;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .answer-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .answer-btn.selected {
+            background: #e3f2fd !important;
+            border-color: #2196F3 !important;
+            color: #1976D2;
+            font-weight: 600;
         }
 
         .answer-btn.correct {
@@ -745,11 +760,24 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-top: 30px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-appearance: none;
+            position: relative;
+            z-index: 10;
+            display: block;
         }
 
         .next-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(135deg, #ff5252 0%, #ff6b6b 100%);
+        }
+
+        .next-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
         }
 
         .next-btn:disabled {
@@ -757,6 +785,7 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+            opacity: 0.6;
         }
 
         .test-results {
@@ -795,15 +824,15 @@
         }
 
         .wrong-answer-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #dc3545;
         }
 
         .wrong-answer-item:last-child {
-            border-bottom: none;
             margin-bottom: 0;
-            padding-bottom: 0;
         }
 
         .wrong-word {
@@ -864,11 +893,24 @@
             font-size: 16px;
             margin-bottom: 10px;
             transition: border-color 0.3s;
+            cursor: text;
+            -webkit-user-select: text;
+            user-select: text;
+            touch-action: manipulation;
+            -webkit-appearance: none;
+            position: relative;
+            z-index: 5;
+            background: white;
         }
 
         .meaning-input:focus {
             outline: none;
             border-color: #ff6b6b;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .meaning-input:active {
+            border-color: #ff5252;
         }
 
         .submit-btn {
@@ -991,7 +1033,17 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            margin: 0 10px;
+            margin: 5px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            -webkit-appearance: none;
+            position: relative;
+            z-index: 10;
+        }
+
+        .practice-btn:active {
+            transform: scale(0.95);
+            background: #ff5252;
         }
 
         .practice-btn:hover {
@@ -999,7 +1051,48 @@
             box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
         }
 
-        /* 반응형 디자인 */
+        /* 입력 필드 포커스 상태 스타일 강화 */
+        input[type="text"]:focus,
+        input[type="search"]:focus {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        /* 모바일 터치 최적화 */
+        button, input {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 답안 입력 애니메이션 */
+        .meaning-input {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0.7;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* NEXT 버튼 펄스 효과 */
+        .next-btn:not(:disabled) {
+            animation: subtlePulse 2s infinite;
+        }
+
+        @keyframes subtlePulse {
+            0%, 100% {
+                box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            }
+            50% {
+                box-shadow: 0 5px 20px rgba(255, 107, 107, 0.5);
+            }
+        }
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -1069,10 +1162,19 @@
                 font-size: 18px;
             }
 
+            .meaning-input {
+                font-size: 16px;  /* iOS 자동 줌 방지 */
+                -webkit-text-size-adjust: 100%;
+            }
+
             .next-btn {
                 padding: 12px 40px;
                 font-size: 16px;
                 letter-spacing: 1px;
+                width: 100%;
+                max-width: 300px;
+                margin: 30px auto 0;
+                display: block;
             }
         }
 
@@ -2419,7 +2521,7 @@
             testContent.innerHTML = `
                 <div class="flip-cards-container">
                     ${practiceCards.map((card, index) => `
-                        <div class="flip-card" onclick="flipCard(${index})">
+                        <div class="flip-card" id="flip-card-${index}">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front">
                                     ${card.word}
@@ -2435,11 +2537,29 @@
                     `).join('')}
                 </div>
                 <div class="practice-controls">
-                    <button class="practice-btn" onclick="shufflePracticeCards()">다른 단어로</button>
-                    <button class="practice-btn" onclick="flipAllCards()">모두 뒤집기</button>
-                    <button class="practice-btn" onclick="resetAllCards()">모두 원래대로</button>
+                    <button type="button" class="practice-btn" id="shuffleBtn">다른 단어로</button>
+                    <button type="button" class="practice-btn" id="flipAllBtn">모두 뒤집기</button>
+                    <button type="button" class="practice-btn" id="resetAllBtn">모두 원래대로</button>
                 </div>
             `;
+            
+            // 이벤트 리스너 추가
+            setTimeout(() => {
+                // 카드 클릭 이벤트
+                practiceCards.forEach((_, index) => {
+                    const card = document.getElementById(`flip-card-${index}`);
+                    if (card) {
+                        card.addEventListener('click', function() {
+                            flipCard(index);
+                        });
+                    }
+                });
+                
+                // 버튼 이벤트
+                document.getElementById('shuffleBtn')?.addEventListener('click', shufflePracticeCards);
+                document.getElementById('flipAllBtn')?.addEventListener('click', flipAllCards);
+                document.getElementById('resetAllBtn')?.addEventListener('click', resetAllCards);
+            }, 100);
             
             document.querySelector('.control-btn').style.display = 'none';
             document.getElementById('testInfoText').textContent = '연습 모드 진행 중';
@@ -2511,7 +2631,7 @@
                             <div class="question-hint">예문: ${question.example}</div>
                             <div class="answer-options">
                                 ${options.map((opt, optIdx) => `
-                                    <button class="answer-btn" onclick="selectAnswer(${globalIdx}, '${opt.word.replace(/'/g, "\\'")}')">${opt.meaning}</button>
+                                    <button class="answer-btn" type="button" onclick="selectAnswer(${globalIdx}, '${opt.word.replace(/'/g, "\\'")}')">${opt.meaning}</button>
                                 `).join('')}
                             </div>
                         </div>
@@ -2525,10 +2645,15 @@
                             </div>
                             <div class="question-text">${question.word}</div>
                             <div class="question-hint">예문: ${question.example}</div>
-                            <input type="text" class="meaning-input" id="meaningInput-${globalIdx}" 
+                            <input type="text" 
+                                   class="meaning-input" 
+                                   id="meaningInput-${globalIdx}" 
                                    placeholder="뜻을 입력하세요 (품사 포함)" 
                                    value="${userAnswers[globalIdx] || ''}"
-                                   onkeypress="if(event.key==='Enter') document.getElementById('meaningInput-${globalIdx + 1}')?.focus() || document.querySelector('.next-btn')?.click()">
+                                   autocomplete="off"
+                                   autocorrect="off"
+                                   autocapitalize="off"
+                                   spellcheck="false">
                         </div>
                     `;
                 }
@@ -2539,19 +2664,43 @@
             // NEXT 버튼 추가
             groupHTML += `
                 <div class="test-controls">
-                    <button class="next-btn" onclick="submitGroupAnswers()">NEXT</button>
+                    <button class="next-btn" id="nextButton" type="button" onclick="handleNextButton()">NEXT</button>
                 </div>
             `;
             
             testContent.innerHTML = groupHTML;
             
-            // 첫 번째 입력 필드에 포커스
-            if (testLevel !== 3) {
-                setTimeout(() => {
+            // 이벤트 리스너 추가
+            setTimeout(() => {
+                // 입력 필드 이벤트 리스너
+                groupQuestions.forEach((_, idx) => {
+                    const globalIdx = currentQuestionIndex + idx;
+                    const input = document.getElementById(`meaningInput-${globalIdx}`);
+                    if (input) {
+                        input.addEventListener('click', function() {
+                            this.focus();
+                        });
+                        input.addEventListener('focus', function() {
+                            this.select();
+                        });
+                        input.addEventListener('input', function() {
+                            saveUserAnswer(globalIdx, this.value);
+                        });
+                        input.addEventListener('keypress', function(event) {
+                            if (event.key === 'Enter') {
+                                event.preventDefault();
+                                handleEnterKey(globalIdx);
+                            }
+                        });
+                    }
+                });
+                
+                // 첫 번째 입력 필드에 포커스
+                if (testLevel !== 3) {
                     const firstInput = document.getElementById(`meaningInput-${currentQuestionIndex}`);
                     if (firstInput) firstInput.focus();
-                }, 100);
-            }
+                }
+            }, 100);
         }
 
         // 객관식 옵션 생성
@@ -2576,12 +2725,35 @@
             const buttons = questionDiv.querySelectorAll('.answer-btn');
             buttons.forEach(btn => {
                 btn.classList.remove('selected');
-                if (btn.textContent === words.find(w => w.word === selectedWord)?.meaning) {
+                const btnWord = words.find(w => w.meaning === btn.textContent);
+                if (btnWord && btnWord.word === selectedWord) {
                     btn.classList.add('selected');
                     btn.style.background = '#e3f2fd';
                     btn.style.borderColor = '#2196F3';
                 }
             });
+        }
+
+        // 사용자 답안 저장
+        function saveUserAnswer(index, value) {
+            userAnswers[index] = value;
+        }
+
+        // Enter 키 처리
+        function handleEnterKey(currentIndex) {
+            const nextInput = document.getElementById(`meaningInput-${currentIndex + 1}`);
+            if (nextInput) {
+                nextInput.focus();
+                nextInput.select();
+            } else {
+                // 마지막 입력 필드에서 Enter를 누르면 NEXT 버튼 클릭
+                document.getElementById('nextButton')?.click();
+            }
+        }
+
+        // NEXT 버튼 핸들러
+        function handleNextButton() {
+            submitGroupAnswers();
         }
 
         // 그룹 답안 제출
@@ -2595,6 +2767,11 @@
                 if (testLevel === 3) {
                     // 객관식
                     const selectedWord = userAnswers[globalIdx];
+                    if (!selectedWord) {
+                        alert('모든 문제에 답을 선택해주세요!');
+                        return;
+                    }
+                    
                     if (selectedWord === question.word) {
                         score++;
                     } else {
@@ -2720,14 +2897,18 @@
                 <div class="result-score">${score} / ${testQuestions.length} (${percentage}%)</div>
                 ${wrongAnswers.length > 0 ? `
                     <div class="wrong-answers">
-                        <h3 style="margin-bottom: 15px; color: #333;">오답 정리</h3>
-                        ${wrongAnswers.map(item => `
+                        <h3 style="margin-bottom: 15px; color: #333;">틀린 단어 정리</h3>
+                        ${wrongAnswers.map(item => {
+                            const word = words.find(w => w.word === item.word);
+                            return `
                             <div class="wrong-answer-item">
                                 <div class="wrong-word">${item.word}</div>
                                 <div>정답: <span class="correct-answer">${item.correctMeaning}</span></div>
                                 <div style="color: #6c757d;">내 답: ${item.yourAnswer}</div>
+                                ${word ? `<div style="color: #888; font-size: 14px; margin-top: 5px;">예문: ${word.example}</div>` : ''}
                             </div>
-                        `).join('')}
+                        `;
+                        }).join('')}
                     </div>
                 ` : '<div class="result-message">모든 문제를 맞추셨습니다! 완벽해요! 🎉</div>'}
             `;
