@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>제제편입 7월 먼슬리 어휘 정리</title>
+    <title>제제편입 7월 월간 테스트</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
     <style>
         * {
@@ -1051,6 +1051,118 @@
             box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
         }
 
+        /* 학습 자료 스타일 */
+        .materials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .materials-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .materials-header h2 {
+            font-size: 32px;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .materials-subtitle {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .material-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .material-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .material-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .material-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .material-description {
+            font-size: 16px;
+            color: #6c757d;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .material-btn {
+            padding: 12px 35px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .material-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .video-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .video-link:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .video-icon {
+            font-size: 18px;
+        }
+
         /* 입력 필드 포커스 상태 스타일 강화 */
         input[type="text"]:focus,
         input[type="search"]:focus {
@@ -1203,7 +1315,7 @@
         <div class="header-container">
             <div class="header-title">
                 <span class="title-english">JEJE TRANSFER MONTHLY</span>
-                <span class="title-korean">제제편입 월간 어휘</span>
+                <span class="title-korean">제제편입 7월 월간 테스트</span>
             </div>
             <div class="header-subtitle">
                 <span class="quote-mark">"</span>
@@ -1223,9 +1335,10 @@
         </div>
         
         <div class="view-toggle">
-            <button class="toggle-btn active" onclick="showView('card')">카드 뷰</button>
-            <button class="toggle-btn" onclick="showView('table')">테이블 뷰</button>
-            <button class="toggle-btn" onclick="showView('test')">테스트 📝</button>
+            <button class="toggle-btn active" onclick="showView('card')">카드 어휘</button>
+            <button class="toggle-btn" onclick="showView('table')">어휘 테이블</button>
+            <button class="toggle-btn" onclick="showView('test')">어휘 테스트 📝</button>
+            <button class="toggle-btn" onclick="showView('materials')">학습 자료 📚</button>
         </div>
         
         <!-- 카드 뷰 -->
@@ -1280,6 +1393,50 @@
                 
                 <div id="testResults" class="test-results" style="display: none;">
                     <!-- 테스트 결과가 여기에 표시됩니다 -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- 학습 자료 뷰 -->
+        <div id="materialsView" style="display: none;">
+            <div class="materials-container">
+                <div class="materials-header">
+                    <h2>📚 학습 자료</h2>
+                    <p class="materials-subtitle">7월 월간 테스트 관련 자료를 확인하세요</p>
+                </div>
+                
+                <div class="materials-grid">
+                    <div class="material-card">
+                        <div class="material-icon">📄</div>
+                        <h3 class="material-title">시험지</h3>
+                        <p class="material-description">7월 월간 테스트 시험지를 다운로드하세요</p>
+                        <button class="material-btn" onclick="window.open('/files/july-test.pdf', '_blank')">
+                            다운로드
+                        </button>
+                    </div>
+                    
+                    <div class="material-card">
+                        <div class="material-icon">📋</div>
+                        <h3 class="material-title">해설지</h3>
+                        <p class="material-description">상세한 문제 해설과 추가 설명을 확인하세요</p>
+                        <button class="material-btn" onclick="alert('해설지 다운로드 기능은 준비 중입니다.')">
+                            다운로드
+                        </button>
+                    </div>
+                    
+                    <div class="material-card">
+                        <div class="material-icon">🎥</div>
+                        <h3 class="material-title">해설 강의</h3>
+                        <p class="material-description">문제 해설 강의를 시청하세요</p>
+                        <div class="video-links">
+                            <a href="https://youtu.be/zMRr8nLlans" target="_blank" class="video-link">
+                                <span class="video-icon">▶</span> 해설 강의 Part 1
+                            </a>
+                            <a href="https://youtu.be/SAVeD6_Ay0o" target="_blank" class="video-link">
+                                <span class="video-icon">▶</span> 해설 강의 Part 2
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2271,8 +2428,12 @@
                 // 중요도는 1-5 랜덤 (앞쪽 단어일수록 중요도 높음)
                 word.importance = Math.max(1, 5 - Math.floor(index / 30));
                 // 로컬 스토리지에서 암기 상태 불러오기
-                const memorizedWords = JSON.parse(localStorage.getItem('memorizedWords') || '[]');
-                word.memorized = memorizedWords.includes(word.word);
+                try {
+                    const memorizedWords = JSON.parse(localStorage.getItem('memorizedWords') || '[]');
+                    word.memorized = memorizedWords.includes(word.word);
+                } catch (e) {
+                    word.memorized = false;
+                }
             });
             updateWordStats();
         }
@@ -2295,8 +2456,12 @@
                 word.memorized = !word.memorized;
                 
                 // 로컬 스토리지에 저장
-                const memorizedWords = words.filter(w => w.memorized).map(w => w.word);
-                localStorage.setItem('memorizedWords', JSON.stringify(memorizedWords));
+                try {
+                    const memorizedWords = words.filter(w => w.memorized).map(w => w.word);
+                    localStorage.setItem('memorizedWords', JSON.stringify(memorizedWords));
+                } catch (e) {
+                    console.log('localStorage 저장 실패');
+                }
                 
                 updateWordStats();
                 renderCards();
@@ -2353,11 +2518,26 @@
             });
         }
 
+        // PDF 다운로드 함수
+        function downloadTestPaper() {
+            // 여기에 실제 PDF의 Base64 데이터를 넣어야 합니다
+            // const base64PDF = "JVBERi0xLjQKJcOkw7zDtsOfCj..."; // 실제 PDF base64 데이터
+            
+            // 현재는 Notion 링크로 이동
+            window.open('https://jejetransfer.notion.site/jejemonthly7?source=copy_link', '_blank');
+        }
+        
+        function downloadAnswerSheet() {
+            // Google Drive 링크로 이동
+            window.open('https://drive.google.com/file/d/14Y6UyGbgg_c0L2HF3GbQtTId9MZx3Yae/view', '_blank');
+        }
+
         // 뷰 전환
         function showView(view) {
             const cardView = document.getElementById('cardView');
             const tableView = document.getElementById('tableView');
             const testView = document.getElementById('testView');
+            const materialsView = document.getElementById('materialsView');
             const buttons = document.querySelectorAll('.toggle-btn');
             
             buttons.forEach(btn => btn.classList.remove('active'));
@@ -2365,6 +2545,7 @@
             cardView.style.display = 'none';
             tableView.style.display = 'none';
             testView.style.display = 'none';
+            materialsView.style.display = 'none';
             
             if (view === 'card') {
                 cardView.style.display = 'grid';
@@ -2376,6 +2557,9 @@
                 testView.style.display = 'block';
                 buttons[2].classList.add('active');
                 resetTest();
+            } else if (view === 'materials') {
+                materialsView.style.display = 'block';
+                buttons[3].classList.add('active');
             }
         }
 
@@ -2385,9 +2569,17 @@
         let score = 0;
         let testQuestions = [];
         let wrongAnswers = [];
-        let failedWords = JSON.parse(localStorage.getItem('failedWords') || '[]');
+        let failedWords = [];
         let practiceCards = [];
         let userAnswers = [];
+        
+        // localStorage 안전하게 사용하기
+        try {
+            failedWords = JSON.parse(localStorage.getItem('failedWords') || '[]');
+        } catch (e) {
+            failedWords = [];
+            console.log('localStorage 접근 불가');
+        }
 
         // 테스트 레벨 설정
         function setTestLevel(level) {
@@ -2412,10 +2604,8 @@
                 const count = Math.floor(words.length * 0.6);
                 infoText.innerHTML = `핵심 테스트: <strong>${count}</strong>개 문제`;
             } else if (testLevel === 3) {
-                const failedWordsList = words.filter(w => failedWords.includes(w.word));
-                const notMemorized = words.filter(w => !w.memorized);
-                const combined = [...new Set([...failedWordsList, ...notMemorized])];
-                infoText.innerHTML = `복습 테스트: <strong>${combined.length}</strong>개 문제`;
+                const reviewWords = words.filter(w => !w.memorized || failedWords.includes(w.word));
+                infoText.innerHTML = `복습 테스트: <strong>${reviewWords.length}</strong>개 문제`;
             } else if (testLevel === 4) {
                 infoText.innerHTML = '간이 테스트: <strong>10</strong>개 문제';
             }
@@ -2488,10 +2678,8 @@
                 testQuestions = sortedByImportance.slice(0, topCount).sort(() => Math.random() - 0.5);
             } else if (testLevel === 3) {
                 // Level 3: 틀린 단어 + 외우지 않은 단어
-                const failedWordsList = words.filter(w => failedWords.includes(w.word));
-                const notMemorized = words.filter(w => !w.memorized);
-                const combined = [...new Set([...failedWordsList, ...notMemorized])];
-                testQuestions = combined.sort(() => Math.random() - 0.5);
+                testQuestions = words.filter(w => !w.memorized || failedWords.includes(w.word))
+                    .sort(() => Math.random() - 0.5);
                 
                 if (testQuestions.length === 0) {
                     alert('복습할 단어가 없습니다! 모든 단어를 외우셨네요! 🎉');
@@ -2785,7 +2973,11 @@
                         // 틀린 단어 저장
                         if (!failedWords.includes(question.word)) {
                             failedWords.push(question.word);
-                            localStorage.setItem('failedWords', JSON.stringify(failedWords));
+                            try {
+                                localStorage.setItem('failedWords', JSON.stringify(failedWords));
+                            } catch (e) {
+                                console.log('localStorage 저장 실패');
+                            }
                         }
                     }
                 } else {
@@ -2807,7 +2999,11 @@
                         // 틀린 단어 저장
                         if (!failedWords.includes(question.word)) {
                             failedWords.push(question.word);
-                            localStorage.setItem('failedWords', JSON.stringify(failedWords));
+                            try {
+                                localStorage.setItem('failedWords', JSON.stringify(failedWords));
+                            } catch (e) {
+                                console.log('localStorage 저장 실패');
+                            }
                         }
                     }
                 }
@@ -2885,7 +3081,11 @@
                 // 통과한 단어들은 틀린 단어 목록에서 제거
                 if (testLevel === 3) {
                     failedWords = failedWords.filter(w => wrongAnswers.some(wa => wa.word === w));
-                    localStorage.setItem('failedWords', JSON.stringify(failedWords));
+                    try {
+                        localStorage.setItem('failedWords', JSON.stringify(failedWords));
+                    } catch (e) {
+                        console.log('localStorage 저장 실패');
+                    }
                 }
             } else {
                 passFailMessage = `<div class="test-fail">😢 아쉽네요. Level ${testLevel} 미통과 (${passingScore}% 필요)</div>`;
@@ -2945,4 +3145,3 @@
     </script>
 </body>
 </html>
-                                
