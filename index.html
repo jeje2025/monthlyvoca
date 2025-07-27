@@ -1,9 +1,10 @@
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet"><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>제제편입 7월 먼슬리 어휘 정리</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -25,60 +26,64 @@
 
         .header-container {
             text-align: center;
-            padding: 40px 20px 50px;
+            padding: 30px 15px 40px;
             position: relative;
         }
 
         .header-title {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .title-english {
             display: block;
             font-family: 'Bebas Neue', cursive;
-            font-size: 3.5em;
+            font-size: clamp(2rem, 8vw, 3.5rem);
             color: white;
-            letter-spacing: 4px;
-            text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
             margin-bottom: 5px;
+            line-height: 1.1;
         }
 
         .title-korean {
             display: block;
             font-family: 'Noto Sans KR', sans-serif;
-            font-size: 1.2em;
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
             font-weight: 300;
             color: rgba(255,255,255,0.9);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
 
         .header-subtitle {
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .quote-mark {
             font-family: 'Playfair Display', serif;
-            font-size: 2em;
+            font-size: clamp(1.2rem, 4vw, 2rem);
             color: rgba(255,255,255,0.7);
             vertical-align: middle;
         }
 
         .quote-text {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4em;
+            font-size: clamp(1rem, 3.5vw, 1.4rem);
             color: white;
             font-style: italic;
-            margin: 0 10px;
+            margin: 0 5px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            display: inline-block;
         }
 
         .quote-description {
-            margin-top: 10px;
+            margin-top: 8px;
             font-family: 'Noto Sans KR', sans-serif;
-            font-size: 0.95em;
+            font-size: clamp(0.75rem, 2.5vw, 0.95rem);
             color: rgba(255,255,255,0.85);
             font-weight: 300;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+            padding: 0 20px;
         }
 
         h1 {
@@ -117,6 +122,12 @@
             border-radius: 10px;
             font-size: 14px;
             color: #6c757d;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .word-stats span {
+            white-space: nowrap;
         }
 
         .word-stats strong {
@@ -416,6 +427,7 @@
             justify-content: center;
             margin-bottom: 20px;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .toggle-btn {
@@ -445,29 +457,6 @@
             border-color: #ff6b6b;
         }
 
-        /* 반응형 디자인 */
-        @media (max-width: 768px) {
-            .word-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .table-view {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            table {
-                min-width: 800px;
-            }
-            
-            /* 모바일에서 뜻 열 스타일 */
-            td:last-child {
-                white-space: normal;
-                min-width: 120px;
-                word-break: keep-all;
-            }
-        }
-
         /* 테스트 뷰 스타일 */
         .test-container {
             max-width: 800px;
@@ -483,6 +472,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .test-header h2 {
@@ -502,6 +493,7 @@
             gap: 10px;
             justify-content: center;
             margin-bottom: 30px;
+            flex-wrap: wrap;
         }
 
         .mode-btn {
@@ -609,22 +601,54 @@
             box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
         }
 
+        /* 3문제 그룹 스타일 */
+        .question-group {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
         .question {
-            text-align: center;
-            margin-bottom: 30px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .question:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
         }
 
         .question-text {
-            font-size: 24px;
+            font-size: 20px;
             color: #333;
             margin-bottom: 10px;
             font-weight: 600;
         }
 
         .question-hint {
-            font-size: 16px;
+            font-size: 14px;
             color: #6c757d;
             font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.5;
         }
 
         .answer-options {
@@ -686,7 +710,7 @@
 
         .test-controls {
             text-align: center;
-            margin-bottom: 20px;
+            margin-top: 30px;
         }
 
         .control-btn {
@@ -705,6 +729,34 @@
         .control-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 7px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .next-btn {
+            padding: 15px 50px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 30px;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .next-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .test-results {
@@ -810,7 +862,7 @@
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             font-size: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             transition: border-color 0.3s;
         }
 
@@ -945,6 +997,102 @@
         .practice-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header-container {
+                padding: 20px 10px 30px;
+            }
+
+            .title-english {
+                letter-spacing: 1px;
+            }
+
+            .quote-text {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .word-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-view {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            table {
+                min-width: 800px;
+            }
+            
+            /* 모바일에서 뜻 열 스타일 */
+            td:last-child {
+                white-space: normal;
+                min-width: 120px;
+                word-break: keep-all;
+            }
+
+            .test-header {
+                padding: 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .test-mode-selector {
+                padding: 0 10px;
+            }
+
+            .mode-btn {
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+
+            .test-content {
+                padding: 20px;
+            }
+
+            .question {
+                padding: 20px;
+            }
+
+            .answer-options {
+                grid-template-columns: 1fr;
+            }
+
+            .question-text {
+                font-size: 18px;
+            }
+
+            .next-btn {
+                padding: 12px 40px;
+                font-size: 16px;
+                letter-spacing: 1px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .view-toggle {
+                gap: 5px;
+            }
+
+            .toggle-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            .word-stats {
+                font-size: 12px;
+            }
+
+            .word-stats strong {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -2137,6 +2285,7 @@
         let wrongAnswers = [];
         let failedWords = JSON.parse(localStorage.getItem('failedWords') || '[]');
         let practiceCards = [];
+        let userAnswers = [];
 
         // 테스트 레벨 설정
         function setTestLevel(level) {
@@ -2175,6 +2324,7 @@
             currentQuestionIndex = 0;
             score = 0;
             wrongAnswers = [];
+            userAnswers = [];
             
             let levelText = '';
             let levelIcon = '';
@@ -2254,10 +2404,11 @@
             currentQuestionIndex = 0;
             score = 0;
             wrongAnswers = [];
+            userAnswers = Array(testQuestions.length).fill('');
             
             document.querySelector('.control-btn').style.display = 'none';
             
-            showQuestion();
+            showQuestionGroup();
         }
 
         // 연습 모드 시작
@@ -2326,8 +2477,8 @@
             startPracticeMode();
         }
 
-        // 문제 표시
-        function showQuestion() {
+        // 3문제씩 그룹으로 표시
+        function showQuestionGroup() {
             if (!testQuestions || currentQuestionIndex >= testQuestions.length) {
                 showResults();
                 return;
@@ -2335,72 +2486,158 @@
 
             // 진행 상황 업데이트
             const infoText = document.getElementById('testInfoText');
-            infoText.innerHTML = `진행 중: <strong>${currentQuestionIndex + 1}</strong> / <strong>${testQuestions.length}</strong> (현재 점수: ${score})`;
+            const totalPages = Math.ceil(testQuestions.length / 3);
+            const currentPage = Math.floor(currentQuestionIndex / 3) + 1;
+            infoText.innerHTML = `페이지: <strong>${currentPage}</strong> / <strong>${totalPages}</strong> (현재 점수: ${score})`;
 
-            const question = testQuestions[currentQuestionIndex];
             const testContent = document.getElementById('testContent');
-
-            if (testLevel === 3) {
-                // Level 3: 객관식
-                const options = generateOptions(question, 'meaning');
-                testContent.innerHTML = `
-                    <div class="question">
-                        <div class="question-text">${question.word}</div>
-                        <div class="question-hint">예문: ${question.example}</div>
-                    </div>
-                    <div class="answer-options">
-                        ${options.map((opt, idx) => `
-                            <button class="answer-btn" onclick="checkMultipleChoice('${opt.word.replace(/'/g, "\\'")}', '${question.word.replace(/'/g, "\\'")}')">${opt.meaning}</button>
-                        `).join('')}
-                    </div>
-                `;
-            } else if (testLevel === 1 || testLevel === 2 || testLevel === 4) {
-                // Level 1, 2, 4: 주관식
-                testContent.innerHTML = `
-                    <div class="question">
-                        <div class="question-text">${question.word}</div>
-                        <div class="question-hint">예문: ${question.example}</div>
-                    </div>
-                    <input type="text" class="meaning-input" id="meaningInput" 
-                           placeholder="뜻을 입력하세요 (품사 포함)" 
-                           onkeypress="if(event.key==='Enter') submitAnswer()">
-                    <div style="text-align: center;">
-                        <button class="submit-btn" onclick="submitAnswer()">제출</button>
-                    </div>
-                `;
+            const groupQuestions = testQuestions.slice(currentQuestionIndex, currentQuestionIndex + 3);
+            
+            let groupHTML = '<div class="question-group">';
+            
+            groupQuestions.forEach((question, idx) => {
+                const globalIdx = currentQuestionIndex + idx;
+                const questionNumber = globalIdx + 1;
+                
+                if (testLevel === 3) {
+                    // Level 3: 객관식
+                    const options = generateOptions(question, 'meaning');
+                    groupHTML += `
+                        <div class="question" id="question-${globalIdx}">
+                            <div class="question-header">
+                                <span class="question-number">문제 ${questionNumber}</span>
+                            </div>
+                            <div class="question-text">${question.word}</div>
+                            <div class="question-hint">예문: ${question.example}</div>
+                            <div class="answer-options">
+                                ${options.map((opt, optIdx) => `
+                                    <button class="answer-btn" onclick="selectAnswer(${globalIdx}, '${opt.word.replace(/'/g, "\\'")}')">${opt.meaning}</button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Level 1, 2, 4: 주관식
+                    groupHTML += `
+                        <div class="question" id="question-${globalIdx}">
+                            <div class="question-header">
+                                <span class="question-number">문제 ${questionNumber}</span>
+                            </div>
+                            <div class="question-text">${question.word}</div>
+                            <div class="question-hint">예문: ${question.example}</div>
+                            <input type="text" class="meaning-input" id="meaningInput-${globalIdx}" 
+                                   placeholder="뜻을 입력하세요 (품사 포함)" 
+                                   value="${userAnswers[globalIdx] || ''}"
+                                   onkeypress="if(event.key==='Enter') document.getElementById('meaningInput-${globalIdx + 1}')?.focus() || document.querySelector('.next-btn')?.click()">
+                        </div>
+                    `;
+                }
+            });
+            
+            groupHTML += '</div>';
+            
+            // NEXT 버튼 추가
+            groupHTML += `
+                <div class="test-controls">
+                    <button class="next-btn" onclick="submitGroupAnswers()">NEXT</button>
+                </div>
+            `;
+            
+            testContent.innerHTML = groupHTML;
+            
+            // 첫 번째 입력 필드에 포커스
+            if (testLevel !== 3) {
                 setTimeout(() => {
-                    const input = document.getElementById('meaningInput');
-                    if (input) input.focus();
+                    const firstInput = document.getElementById(`meaningInput-${currentQuestionIndex}`);
+                    if (firstInput) firstInput.focus();
                 }, 100);
             }
         }
 
-        // 주관식 답안 제출
-        function submitAnswer() {
-            const userAnswer = document.getElementById('meaningInput').value.trim().toLowerCase();
-            const correctAnswer = testQuestions[currentQuestionIndex].meaning.toLowerCase();
+        // 객관식 옵션 생성
+        function generateOptions(correctWord, type) {
+            const options = [correctWord];
+            const availableWords = words.filter(w => w.word !== correctWord.word);
             
-            // 답안 비교 (유연한 채점)
-            const isCorrect = checkAnswerSimilarity(userAnswer, correctAnswer);
+            while (options.length < 4 && availableWords.length > 0) {
+                const randomIndex = Math.floor(Math.random() * availableWords.length);
+                options.push(availableWords.splice(randomIndex, 1)[0]);
+            }
             
-            if (isCorrect) {
-                score++;
-            } else {
-                wrongAnswers.push({
-                    word: testQuestions[currentQuestionIndex].word,
-                    yourAnswer: userAnswer || '(미입력)',
-                    correctMeaning: testQuestions[currentQuestionIndex].meaning
-                });
+            return options.sort(() => Math.random() - 0.5);
+        }
+
+        // 객관식 답안 선택
+        function selectAnswer(questionIdx, selectedWord) {
+            userAnswers[questionIdx] = selectedWord;
+            
+            // 선택된 버튼 표시
+            const questionDiv = document.getElementById(`question-${questionIdx}`);
+            const buttons = questionDiv.querySelectorAll('.answer-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('selected');
+                if (btn.textContent === words.find(w => w.word === selectedWord)?.meaning) {
+                    btn.classList.add('selected');
+                    btn.style.background = '#e3f2fd';
+                    btn.style.borderColor = '#2196F3';
+                }
+            });
+        }
+
+        // 그룹 답안 제출
+        function submitGroupAnswers() {
+            const groupSize = Math.min(3, testQuestions.length - currentQuestionIndex);
+            
+            for (let i = 0; i < groupSize; i++) {
+                const globalIdx = currentQuestionIndex + i;
+                const question = testQuestions[globalIdx];
                 
-                // 틀린 단어 저장
-                if (!failedWords.includes(testQuestions[currentQuestionIndex].word)) {
-                    failedWords.push(testQuestions[currentQuestionIndex].word);
-                    localStorage.setItem('failedWords', JSON.stringify(failedWords));
+                if (testLevel === 3) {
+                    // 객관식
+                    const selectedWord = userAnswers[globalIdx];
+                    if (selectedWord === question.word) {
+                        score++;
+                    } else {
+                        const selectedMeaning = words.find(w => w.word === selectedWord)?.meaning || '(미선택)';
+                        wrongAnswers.push({
+                            word: question.word,
+                            yourAnswer: selectedMeaning,
+                            correctMeaning: question.meaning
+                        });
+                        
+                        // 틀린 단어 저장
+                        if (!failedWords.includes(question.word)) {
+                            failedWords.push(question.word);
+                            localStorage.setItem('failedWords', JSON.stringify(failedWords));
+                        }
+                    }
+                } else {
+                    // 주관식
+                    const userAnswer = document.getElementById(`meaningInput-${globalIdx}`)?.value.trim() || '';
+                    userAnswers[globalIdx] = userAnswer;
+                    
+                    const isCorrect = checkAnswerSimilarity(userAnswer.toLowerCase(), question.meaning.toLowerCase());
+                    
+                    if (isCorrect) {
+                        score++;
+                    } else {
+                        wrongAnswers.push({
+                            word: question.word,
+                            yourAnswer: userAnswer || '(미입력)',
+                            correctMeaning: question.meaning
+                        });
+                        
+                        // 틀린 단어 저장
+                        if (!failedWords.includes(question.word)) {
+                            failedWords.push(question.word);
+                            localStorage.setItem('failedWords', JSON.stringify(failedWords));
+                        }
+                    }
                 }
             }
             
-            currentQuestionIndex++;
-            showQuestion();
+            currentQuestionIndex += groupSize;
+            showQuestionGroup();
         }
 
         // 답안 유사도 체크 (품사와 핵심 의미 확인)
@@ -2439,45 +2676,6 @@
                       .split(/\s+/)
                       .filter(word => word.length > 1)
                       .filter(word => !['의', '을', '를', '이', '가', '은', '는', '와', '과'].includes(word));
-        }
-
-        // 객관식 답안 확인
-        function checkMultipleChoice(selected, correct) {
-            const buttons = document.querySelectorAll('.answer-btn');
-            const correctWord = words.find(w => w.word === correct);
-            const selectedWord = words.find(w => w.word === selected);
-            
-            buttons.forEach(btn => {
-                btn.classList.add('disabled');
-                btn.onclick = null;
-                
-                if (btn.textContent === correctWord.meaning) {
-                    btn.classList.add('correct');
-                } else if (selectedWord && btn.textContent === selectedWord.meaning) {
-                    btn.classList.add('incorrect');
-                }
-            });
-
-            if (selected === correct) {
-                score++;
-            } else {
-                wrongAnswers.push({
-                    word: correct,
-                    yourAnswer: selectedWord ? selectedWord.meaning : '(선택 오류)',
-                    correctMeaning: correctWord.meaning
-                });
-                
-                // 틀린 단어 저장
-                if (!failedWords.includes(correct)) {
-                    failedWords.push(correct);
-                    localStorage.setItem('failedWords', JSON.stringify(failedWords));
-                }
-            }
-
-            setTimeout(() => {
-                currentQuestionIndex++;
-                showQuestion();
-            }, 1500);
         }
 
         // 결과 표시
@@ -2566,3 +2764,4 @@
     </script>
 </body>
 </html>
+                                
