@@ -2587,15 +2587,15 @@
         }
 
         // 테스트 레벨 설정
-        function setTestLevel(level) {
-            testLevel = level;
-            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // 테스트 정보 업데이트
-            updateTestInfo();
-            resetTest();
-        }
+      function setTestLevel(event, level) {
+    testLevel = level;
+    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // 테스트 정보 업데이트
+    updateTestInfo();
+    resetTest();
+}
 
         // 테스트 정보 업데이트
         function updateTestInfo() {
